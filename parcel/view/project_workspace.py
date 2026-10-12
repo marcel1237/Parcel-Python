@@ -1,6 +1,6 @@
 import os
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSplitter, QTabWidget, QProcess, QMessageBox
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSplitter, QTabWidget, QMessageBox
+from PyQt6.QtCore import Qt, QProcess
 from PyQt6.QtGui import QIcon
 from parcel.view.project_header import ProjectHeader
 from parcel.view.explorer.package_explorer import PackageExplorer

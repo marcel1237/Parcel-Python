@@ -1,5 +1,7 @@
 import os
 import sys
+# CRITICAL: QWebEngineView must be imported before QApplication is created
+from PyQt6.QtWebEngineWidgets import QWebEngineView
 from PyQt6.QtCore import Qt, QDir, QRect
 from PyQt6.QtWidgets import QApplication, QStyleFactory
 from PyQt6.QtGui import QIcon, QPixmap, QPainter, QLinearGradient, QColor, QFont
