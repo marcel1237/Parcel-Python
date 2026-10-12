@@ -1,8 +1,7 @@
 import os
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QTabWidget, QLabel
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QTabWidget
 from PyQt6.QtCore import pyqtSignal
 from parcel.view.editor.editor_pane import EditorPane
-from parcel.service.persistence import PersistenceService
 
 class EditorHost(QWidget):
     requestAutonomousAI = pyqtSignal(str)
