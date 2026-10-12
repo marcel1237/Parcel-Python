@@ -1,0 +1,15 @@
+{
+  "category": "DocumentationAndLearning",
+  "rules": [
+    {
+      "patterns": ["documentação", "docs", "manual", "onde ler"],
+      "response": "A base de conhecimento completa está no arquivo 'Project_Knowledge_Base.pdf' na raiz do projeto. Posso resumir qualquer seção para você.",
+      "intent": "DOC_SEARCH"
+    },
+    {
+      "patterns": ["como você aprende", "conhecimento", "treinamento"],
+      "response": "Eu aprendo através da análise dos scripts reais do ProjectWizard e das regras SSQLM definidas nos arquivos JSON dentro da pasta QLM. Você pode expandir meu cérebro adicionando novos JSONs lá.",
+      "intent": "KNOWLEDGE_INFO"
+    }
+  ]
+}

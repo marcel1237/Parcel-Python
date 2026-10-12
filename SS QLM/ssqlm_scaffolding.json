@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Dynamic Code and Project Scaffolding",
+  "category": "Automation",
+  "entries": [
+    {
+      "capability": "Dynamic Heredoc Scaffolding",
+      "patterns": ["scaffold dinâmico", "gerar boilerplate", "criar README"],
+      "logic": "Uses unquoted Heredocs (<<EOF) to allow shell variable expansion during the generation process. Essential for including dynamic timestamps, project names, and author metadata.",
+      "implementation": "cat > file.md <<EOF\n# $PROJECT_NAME\nDate: $CURRENT_DATE\nEOF",
+      "rationale": "Allows for highly customized and context-aware file generation with zero external templating dependencies."
+    },
+    {
+      "capability": "Preserving Variables in Generated Scripts",
+      "patterns": ["escapar variável", "literal $", "gerar script com variáveis"],
+      "logic": "When generating a script that must contain its own shell variables, use backslash escaping (\\$) within a dynamic Heredoc to prevent premature expansion.",
+      "implementation": "cat > script.sh <<EOF\nCURRENT_DIR=\\$(pwd)\necho \"Dir is \\$CURRENT_DIR\"\nEOF",
+      "rationale": "Crucial for generating operational scripts that need to reference environment variables at runtime rather than at generation time."
+    }
+  ]
+}

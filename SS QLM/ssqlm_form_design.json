@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Form and Data Input UI Design",
+  "category": "UI_Input",
+  "entries": [
+    {
+      "capability": "Grid-Based Form Alignment",
+      "patterns": ["criar formulário", "gridpane layout", "alinhar inputs"],
+      "logic": "Uses GridPane for precise control over label and field alignment. Labels are typically placed in column 0, and fields in column 1 (or spanning).",
+      "implementation": "grid.add(label, 0, row); grid.add(field, 0, row + 1); // Or side-by-side",
+      "rationale": "Provides a clean, professional, and readable data entry interface that adapts well to window resizing."
+    },
+    {
+      "capability": "Priority Input Expansion",
+      "patterns": ["input responsivo", "hgrow field", "expandir caixa de texto"],
+      "logic": "Sets HGrow priority to ALWAYS for TextFields within layout containers, ensuring they take up all available horizontal space.",
+      "implementation": "GridPane.setHgrow(textField, Priority.ALWAYS); textField.setMaxWidth(Double.MAX_VALUE);",
+      "rationale": "Enhances UX by allowing users to see long strings (like paths or package names) in their entirety."
+    }
+  ]
+}

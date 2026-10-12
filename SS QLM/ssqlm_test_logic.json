@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Automated Unit Testing for Scripts",
+  "category": "Testing",
+  "entries": [
+    {
+      "capability": "Minimalist Mocking",
+      "patterns": ["fazer mock", "simular comando", "test double"],
+      "logic": "Overrides system commands by defining local functions with the same name. Only effective within the same script context.",
+      "implementation": "date() { echo \"2026-01-01\"; }",
+      "rationale": "Allows for deterministic testing of scripts that depend on non-deterministic system state."
+    },
+    {
+      "capability": "SSQLM Assertions",
+      "patterns": ["asserção", "verificar resultado", "unit test bash"],
+      "logic": "Compares expected vs actual values using simple if/else blocks and returns status codes for suite aggregation.",
+      "implementation": "if [[ \"$exp\" == \"$act\" ]]; then pass; else fail; fi",
+      "rationale": "Provides immediate feedback on code regressions without heavy third-party dependencies."
+    }
+  ]
+}

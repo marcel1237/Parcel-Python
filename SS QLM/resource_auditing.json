@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Predictive Resource Monitoring",
+  "category": "System Auditing",
+  "entries": [
+    {
+      "principle": "Non-Blocking Resource Checks",
+      "bad_example": "RAM_USAGE=$(free -m | grep Mem | awk '{print $3}')",
+      "good_example": "check_resources() { local mem_threshold=90; local cpu_threshold=80; # Logic using /proc/stat for non-forking checks preferred; }",
+      "rationale": "Frequent calling of external binaries like 'free' or 'top' in a loop causes process overhead. SS QLM encourages reading directly from /proc/meminfo or /proc/loadavg for high-frequency auditing without spawning subshells."
+    },
+    {
+      "principle": "Disk Pressure Safeguard",
+      "bad_example": "tar -czf backup.tar.gz /data",
+      "good_example": "required_kb=$(du -s /data | awk '{print $1}'); available_kb=$(df --output=avail / | tail -1); [[ $available_kb -gt $required_kb ]] || { echo 'Insufficient space'; exit 1; }; tar ...",
+      "rationale": "Massive file operations should never start without calculating the required vs available space. SS QLM mandates a 'Space-Check-First' pattern to prevent filesystem lockups."
+    }
+  ]
+}

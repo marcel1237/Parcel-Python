@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Standardized Script Telemetry",
+  "category": "Logging",
+  "entries": [
+    {
+      "pattern": "Structured Logging",
+      "bad_example": "echo \"Error happened\"",
+      "good_example": "log_event() { local level=$1 msg=$2; echo \"[$(date +'%Y-%m-%dT%H:%M:%S%z')] [${level}] ${msg}\" >&2; }\nlog_event \"ERROR\" \"Failed to connect to DB\"",
+      "rationale": "Unstructured logs are useless for automated parsing. SS QLM enforces ISO 8601 timestamps and explicit log levels (INFO, WARN, ERROR, DEBUG) redirected to stderr."
+    },
+    {
+      "pattern": "Silent Mode Capability",
+      "bad_example": "echo \"Step 1...\"",
+      "good_example": "[[ \"${VERBOSE:-false}\" == \"true\" ]] && echo \"Detailed step info...\"",
+      "rationale": "Scripts should be quiet by default for cron jobs but provide deep visibility when needed. SS QLM requires a VERBOSE flag for non-critical output."
+    }
+  ]
+}

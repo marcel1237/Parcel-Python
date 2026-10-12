@@ -1,0 +1,20 @@
+{
+  "category": "HumanFeedback",
+  "rules": [
+    {
+      "patterns": ["obrigado", "valeu", "thanks", "tks", "show", "boa"],
+      "response": "Disponha! Meu propósito é garantir a perfeição técnica dos seus scripts. Algo mais que precise de uma cirurgia extraordinária hoje?",
+      "intent": "GRATITUDE"
+    },
+    {
+      "patterns": ["entendi", "compreendido", "ok", "certo"],
+      "response": "Excelente. Estou em standby no console. Sinta-se à vontade para enviar o próximo arquivo ou comando.",
+      "intent": "ACKNOWLEDGEMENT"
+    },
+    {
+      "patterns": ["parar", "stop", "cancela"],
+      "response": "Operação interrompida. Nenhum arquivo foi modificado. Aguardando novas instruções.",
+      "intent": "CANCEL"
+    }
+  ]
+}

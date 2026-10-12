@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Safe Multi-Process Execution",
+  "category": "Concurrency",
+  "entries": [
+    {
+      "pattern": "Bounded Background Tasks",
+      "bad_example": "for i in {1..100}; do ./task.sh & done; wait",
+      "good_example": "max_jobs=4\nfor i in {1..100}; do\n    (( $(jobs -r | wc -l) >= max_jobs )) && wait -n\n    ./task.sh &\ndone; wait",
+      "rationale": "Firing too many background processes simultaneously leads to fork bombs and OOM errors. SS QLM requires job limiting (semaphores) for system stability."
+    },
+    {
+      "pattern": "The PID Guard",
+      "bad_example": "./myscript.sh & # hope it doesn't run twice",
+      "good_example": "lockfile=\"/tmp/ssqlm.lock\"\nexec 200>\"$lockfile\"\nflock -n 200 || { echo \"Already running\"; exit 1; }",
+      "rationale": "Concurrent execution of scripts modifying the same resources causes race conditions. SS QLM standardizes advisory locking via 'flock' to ensure single-instance integrity."
+    }
+  ]
+}

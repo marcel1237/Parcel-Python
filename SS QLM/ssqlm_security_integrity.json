@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Security, Backup and Integrity",
+  "category": "Security",
+  "entries": [
+    {
+      "utility": "Resource Checksum Mapping",
+      "patterns": ["verificar integridade", "checksum recursos", "sha256 resources"],
+      "logic": "Generates a map of SHA256 hashes for all project assets. Used to detect corruption or tampering.",
+      "implementation": "find resource/ -type f -exec sha256sum {} + > integrity.sha256",
+      "rationale": "Ensures the database and UI assets used by the Parcel IDE are original and uncorrupted."
+    },
+    {
+      "utility": "Automated Atomic Backup",
+      "patterns": ["fazer backup", "snapshot projeto", "salvar estado"],
+      "logic": "Creates a compressed archive of the source code with a timestamp, ensuring the target directory exists.",
+      "implementation": "tar -czf backups/$(date +%s).tar.gz src/",
+      "rationale": "Reduces the risk of total loss during experimental 'extraordinary' code surgery."
+    }
+  ]
+}

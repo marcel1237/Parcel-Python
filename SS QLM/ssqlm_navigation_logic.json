@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Dynamic View Navigation and Lifecycle",
+  "category": "Navigation",
+  "entries": [
+    {
+      "capability": "Centralized Navigation Service",
+      "patterns": ["navegação entre telas", "mudar view", "navigation service"],
+      "logic": "Decouples the logic of switching views from the UI components. A NavigationService tracks the active Workspace and replaces its center node.",
+      "implementation": "public void navigate(Node node) { workspace.setCenter(node); }",
+      "rationale": "Prevents circular dependencies between views and simplifies complex navigation flows (e.g., Back buttons, Deep-linking)."
+    },
+    {
+      "capability": "Workspace-Aware Navigation",
+      "patterns": ["set workspace", "registrar navegador"],
+      "logic": "The primary UI container (WorkspacePane) registers itself with the NavigationService upon instantiation.",
+      "implementation": "context.getNavigationService().setWorkspace(this);",
+      "rationale": "Ensures that navigation commands always target the correct area of the screen, regardless of where they are triggered."
+    }
+  ]
+}

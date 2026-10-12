@@ -1,0 +1,15 @@
+{
+  "category": "GitCollaboration",
+  "rules": [
+    {
+      "patterns": ["como organizar o git", "equipe", "fluxo de trabalho"],
+      "response": "Recomendo o fluxo 'Git Flow' simplificado: 1. Trabalhe em branches 'feat/nome'. 2. Faça revisões de código (Code Review). 3. Nunca commite binários da pasta 'build/'. Quer que eu revise sua estratégia de branches?",
+      "intent": "GIT_FLOW_ADVICE"
+    },
+    {
+      "patterns": ["escrevi mensagem errada", "corrigir commit", "mudar autor"],
+      "response": "Se você ainda não enviou (push), pode usar 'git commit --amend' para ajustar a última mensagem. Para mudanças complexas, use o painel de 'Versões' da IDE para reverter para um estado estável.",
+      "intent": "GIT_FIX_ADVICE"
+    }
+  ]
+}

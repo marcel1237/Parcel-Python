@@ -1,0 +1,15 @@
+{
+  "category": "Capabilities",
+  "rules": [
+    {
+      "patterns": ["quem é você", "o que você faz", "suas funções", "ajuda", "help"],
+      "response": "Eu sou o Guardião da Qualidade de Shell Script (SSQLM). Posso analisar arquivos, reconstruir scripts (arquiteto), remendar blocos de código (surgical) ou adicionar funcionalidades (append) de forma atômica e segura.",
+      "intent": "IDENTITY"
+    },
+    {
+      "patterns": ["forma humana", "linguagem natural", "posso dizer", "como falar"],
+      "response": "Com certeza! Você pode descrever o que deseja em linguagem natural (ex: 'adicione um log de erro no final') e eu traduzirei isso para uma operação SSQLM robusta e segura.",
+      "intent": "CAPABILITY_CHECK"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Zero-Downtime and Atomic Schema Evolution",
+  "category": "Databases",
+  "entries": [
+    {
+      "principle": "Transactional Migration",
+      "bad_example": "psql -f migration.sql",
+      "good_example": "echo \"BEGIN;\" > run.sql\ncat migration.sql >> run.sql\necho \"COMMIT;\" >> run.sql\npsql -f run.sql",
+      "rationale": "If a migration fails halfway, the database is left in an inconsistent state. SS QLM forces explicit transaction blocks to ensure 'All or Nothing' schema changes."
+    },
+    {
+      "principle": "Safe Credential Handling",
+      "bad_example": "export PGPASSWORD=secret\npsql ...",
+      "good_example": "printf \"*:*:*:user:pass\" > .pgpass && chmod 0600 .pgpass\nexport PGPASSFILE=.pgpass",
+      "rationale": "Exporting passwords to the environment makes them visible to other processes. SS QLM prioritizes native credential files with strict permissions."
+    }
+  ]
+}

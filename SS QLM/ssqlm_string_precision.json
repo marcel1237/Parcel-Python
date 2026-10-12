@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "High-Performance String Manipulation",
+  "category": "String_Engine",
+  "entries": [
+    {
+      "capability": "Native Path Analysis",
+      "patterns": ["extrair extensão", "pegar nome do arquivo", "path manipulation"],
+      "logic": "Uses Bash parameter expansion (%, ##) to parse paths without calling external processes like 'dirname' or 'basename'.",
+      "implementation": "dir=\"${path%/*}\" && file=\"${path##*/}\" && ext=\"${file##*.}\"",
+      "rationale": "SSQLM elite practice to maximize performance and reduce sub-shell overhead."
+    },
+    {
+      "capability": "Slugification & Sanitization",
+      "patterns": ["sanitizar string", "criar slug", "remover espaços"],
+      "logic": "Uses native string replacement and lowercase conversion to generate URL-safe identifiers.",
+      "implementation": "slug=\"${input,,}\" && slug=\"${slug// /-}\" && slug=\"${slug//[^a-z0-9-]/}\"",
+      "rationale": "Ensures consistency in naming conventions for generated files and database keys."
+    }
+  ]
+}

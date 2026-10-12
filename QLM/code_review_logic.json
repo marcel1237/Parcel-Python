@@ -1,0 +1,10 @@
+{
+  "category": "CodeReview",
+  "rules": [
+    {
+      "patterns": ["revise", "revisar", "review", "dar uma olhada", "vê se tá bom"],
+      "response": "Iniciando revisão técnica profunda. Vou buscar por: 1. Fugas de memória. 2. Falhas de segurança SSQLM. 3. Otimizações de performance. Por favor, indique o arquivo ou cole o trecho.",
+      "intent": "CODE_REVIEW_REQUEST"
+    }
+  ]
+}

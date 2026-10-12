@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Data Integrity and Atomic Operations",
+  "category": "Reliability",
+  "entries": [
+    {
+      "strategy": "Atomic Transaction via CAT",
+      "bad_example": "cat > production_config.sh <<'EOF'\n...\nEOF",
+      "good_example": "SUCCESS=0\nTEMP_CFG=$(mktemp)\ncat > \"$TEMP_CFG\" <<'EOF' && SUCCESS=1\n# New Configuration\ndebug_mode=true\nEOF\n\nif [[ \"$SUCCESS\" -eq 1 ]]; then\n    mv \"$TEMP_CFG\" \"production_config.sh\"\nelse\n    rm -f \"$TEMP_CFG\"\n    exit 1\nfi",
+      "rationale": "Writing directly to a target file using 'cat' is not atomic. If the disk is full or the process is killed mid-write, the file is corrupted. SS QLM standardizes the 'Write-to-Temp-then-Move' pattern for 100% data safety."
+    },
+    {
+      "strategy": "The 'Cat-Guard' Check",
+      "bad_example": "cat >> .bashrc <<'EOF'\nalias gs='git status'\nEOF",
+      "good_example": "if ! grep -q \"alias gs='git status'\" ~/.bashrc; then\n    cat >> ~/.bashrc <<'EOF'\nalias gs='git status'\nEOF\nfi",
+      "rationale": "Idempotent 'cat' usage prevents polluting global configuration files with duplicate entries every time a script is run. SS QLM requires a 'Search-before-Append' gate."
+    }
+  ]
+}

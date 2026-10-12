@@ -1,0 +1,20 @@
+{
+  "category": "SSQLMSpecialization",
+  "rules": [
+    {
+      "patterns": ["ssqlm", "o que é ssqlm", "cat logic"],
+      "response": "SSQLM (Shell Script Quality Language Model) é o padrão de elite para scripts Shell. Ele prioriza operações atômicas via 'cat', tratamento de erros via 'trap' e performance sem sub-processos.",
+      "intent": "CORE_DEFINITION"
+    },
+    {
+      "patterns": ["cirurgia", "patch", "marcador"],
+      "response": "A cirurgia de código utiliza marcadores (// BEGIN / // END). É a forma mais segura de automatizar alterações em grandes bases de código sem erros humanos.",
+      "intent": "TECH_EXPLANATION"
+    },
+    {
+      "trigger": ["\\bextraordinary\\b", "modo extraordinário"],
+      "response": "O Modo Extraordinário (SSQLM) ativa a inteligência de planejamento autônomo, permitindo que o agente gere planos de execução multi-camadas para o projeto Parcel C++.",
+      "intent": "SSQLM_ADVANCED"
+    }
+  ]
+}

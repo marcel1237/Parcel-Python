@@ -1,0 +1,37 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Advanced File Manipulation with CAT",
+  "category": "Command: CAT",
+  "entries": [
+    {
+      "pattern": "Heredoc Variable Isolation",
+      "bad_example": "cat > script.sh <<EOF\necho $USER_VAR\nEOF",
+      "good_example": "cat > script.sh <<'EOF'\necho $USER_VAR\nEOF",
+      "rationale": "Without single quotes around EOF, the current shell expands variables *before* writing to the file. SS QLM standard requires literal Heredocs (<<'EOF') to ensure the generated code is exactly what was intended, preventing shell-injection during the generation phase."
+    },
+    {
+      "pattern": "Multi-Layer Block Injection",
+      "bad_example": "echo \"new line\" >> config.conf",
+      "good_example": "cat >> config.conf <<'EOF'\n# SS QLM Auto-Generated Block\nsection_start {\n    property=value\n}\nEOF",
+      "rationale": "Using echo for multiple lines is unreadable and prone to escape errors. 'cat' with Heredocs provides a visual 'what-you-see-is-what-you-get' structure that is much easier to audit and maintain."
+    },
+    {
+      "pattern": "The 'Cat-Patcher' Core Logic",
+      "bad_example": "sed -i '/marker/a new_content' file.txt",
+      "good_example": "inject_between() {\n    local file=$1 start=$2 end=$3\n    {\n        sed -n \"1,/$start/p\" \"$file\"\n        cat # Takes content from pipe/stdin\n        sed -n \"/$end/,$ p\" \"$file\"\n    } > \"$file.tmp\" && mv \"$file.tmp\" \"$file\"\n}",
+      "rationale": "Direct 'sed' appending is hard to scale for large blocks. The SS QLM Patcher pattern uses 'cat' to act as a stream bridge, allowing complex code blocks to be 'poured' into a specific location of a file with mathematical precision."
+    },
+    {
+      "pattern": "No-Clobber Creation",
+      "bad_example": "cat > essential.log <<'EOF'\ninit\nEOF",
+      "good_example": "if [[ ! -f \"essential.log\" ]]; then\n    cat > \"essential.log\" <<'EOF'\n    # Initial state\n    status=ready\nEOF\nfi",
+      "rationale": "SS QLM emphasizes idempotency. Scripts should not overwrite existing state unless explicitly required. Checking for file existence before 'cat' redirection prevents accidental data loss."
+    },
+    {
+      "pattern": "Robust Template Deployment",
+      "bad_example": "cat > src/new_file.sh <<'EOF' ...",
+      "good_example": "mkdir -p \"$(dirname \"$TARGET\")\" && [[ ! -f \"$TARGET\" ]] && cat > \"$TARGET\" <<'EOF'\n# New SSQLM Artifact\nEOF",
+      "rationale": "Creation of new files must ensure the parent directory exists (mkdir -p) and respect the no-clobber rule to avoid destroying existing artifacts during template deployment."
+    }
+  ]
+}

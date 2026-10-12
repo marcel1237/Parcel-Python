@@ -1,0 +1,28 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Code Quality, Metrics and Memory Safety",
+  "category": "Quality_Assurance",
+  "entries": [
+    {
+      "capability": "Memory Leak Detection",
+      "patterns": ["vazamento de memória", "memory leak", "valgrind"],
+      "logic": "Uses Valgrind Memcheck tool to identify unreleased memory and invalid pointer access in C++ binaries.",
+      "implementation": "valgrind --leak-check=full --show-leak-kinds=all ./build/ParcelCPP",
+      "rationale": "Ensures the long-term stability of the Parcel IDE by preventing cumulative resource exhaustion."
+    },
+    {
+      "capability": "Code Metric Analysis",
+      "patterns": ["métricas de código", "densidade de comentários", "cloc"],
+      "logic": "Calculates lines of code (LOC), complexity, and comment-to-code ratio using 'cloc' or custom SSQLM tools.",
+      "implementation": "cloc src/ --include-lang=C++,C,Bourne\\ Shell",
+      "rationale": "Provides visibility into technical debt and helps identify monolithic files that need refactoring."
+    },
+    {
+      "capability": "Header Guard Validation",
+      "patterns": ["verificar headers", "header guard", "pragma once"],
+      "logic": "Ensures all .hpp and .h files contain either #pragma once or unique #ifndef/#define guards to prevent double inclusion.",
+      "implementation": "grep -L \"#pragma once\" src/**/*.hpp",
+      "rationale": "Reduces compilation time and avoids obscure linker errors in large-scale C++ projects."
+    }
+  ]
+}

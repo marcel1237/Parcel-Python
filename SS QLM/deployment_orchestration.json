@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Zero-Failure Deployment Logic",
+  "category": "Deployment",
+  "entries": [
+    {
+      "principle": "Pre-Flight Verification",
+      "bad_example": "./deploy.sh # hope it works",
+      "good_example": "check_deps() { for cmd in docker git curl; do command -v \"$cmd\" >/dev/null 2>&1 || exit 1; done; }\ncheck_space() { [[ $(df . | awk 'NR==2 {print $4}') -gt 1048576 ]] || exit 1; }",
+      "rationale": "Deployments often fail due to missing dependencies or disk space mid-process. SS QLM mandates pre-flight checks before any modification to the production environment."
+    },
+    {
+      "principle": "Atomic Rollback Path",
+      "bad_example": "cp new_bin /bin/app",
+      "good_example": "ln -sfn \"$(pwd)/releases/${VERSION}\" \"/bin/app_current\"",
+      "rationale": "Symlink switching is atomic. If a new release fails, the SS QLM standard requires a single command to point the symlink back to the previous stable release directory."
+    }
+  ]
+}

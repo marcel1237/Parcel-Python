@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Micro-second Precision Measurement",
+  "category": "Performance Testing",
+  "entries": [
+    {
+      "pattern": "High-Resolution Timing",
+      "bad_example": "START=$(date +%s); ./cmd; END=$(date +%s)",
+      "good_example": "start_ns=$(date +%s%N); ./cmd; end_ns=$(date +%s%N); elapsed_ms=$(( (end_ns - start_ns) / 1000000 )); echo \"Done in ${elapsed_ms}ms\"",
+      "rationale": "Standard Unix timestamps (%s) are too coarse for script optimization. SS QLM requires nanosecond precision (%N) to accurately measure logic bottlenecks."
+    },
+    {
+      "pattern": "Averaged Benchmarking",
+      "bad_example": "time ./myscript.sh",
+      "good_example": "benchmark_cmd() { local total=0; for i in {1..5}; do local t_start=$(date +%s%N); \"$@\"; local t_end=$(date +%s%N); total=$((total + (t_end - t_start))); done; echo \"Average: $((total / 5 / 1000000))ms\"; }",
+      "rationale": "Single runs are subject to OS noise and caching. SS QLM standardizes the 'Multi-Run Average' pattern to filter out anomalies and provide realistic performance data."
+    }
+  ]
+}

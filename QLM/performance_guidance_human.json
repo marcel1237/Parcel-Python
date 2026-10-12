@@ -1,0 +1,15 @@
+{
+  "category": "PerformanceGuidance",
+  "rules": [
+    {
+      "patterns": ["ide lenta", "lento", "travando", "performance ruim"],
+      "response": "Lentidão pode ser causada por muitos arquivos abertos ou processos de indexação em background. Tente fechar as abas do navegador interno (Duck.ai/Google) ou use o 'Performance Monitor' no painel de ferramentas para ver o uso de CPU.",
+      "intent": "UI_PERF_HELP"
+    },
+    {
+      "patterns": ["bench", "medir tempo", "quanto tempo demora", "velocidade"],
+      "response": "Posso ajudar a medir a velocidade do seu script. Recomendo usar o padrão de 'Média de 5 rodadas' com precisão de nanosegundos para evitar interferência do sistema. Quer que eu gere um script de benchmark para você?",
+      "intent": "BENCHMARK_OFFER"
+    }
+  ]
+}

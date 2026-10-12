@@ -1,0 +1,25 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Maximum Quality Shell Scripting",
+  "category": "Safety and Standards",
+  "entries": [
+    {
+      "principle": "The Unbreakable Header",
+      "bad_example": "#!/bin/bash\ncp file target",
+      "good_example": "#!/usr/bin/env bash\nset -Eeuo pipefail\n# -E: ERR trap is inherited by functions\n# -e: Exit on error\n# -u: Error on unset variables\n# -o pipefail: Error if any pipe command fails",
+      "rationale": "Standard bash headers fail silently. The SS QLM standard enforces early termination and strict variable checking."
+    },
+    {
+      "principle": "Quoting Integrity",
+      "bad_example": "rm -rf $FILE_PATH",
+      "good_example": "rm -rf \"${FILE_PATH}\"",
+      "rationale": "Missing quotes lead to word splitting and globbing, causing catastrophic data loss if paths contain spaces."
+    },
+    {
+      "principle": "Function Locality",
+      "bad_example": "my_func() { VAR=10; }",
+      "good_example": "my_func() { local var_name=10; }",
+      "rationale": "Global state contamination is the #1 cause of bugs in complex scripts. Always use 'local' or 'declare'."
+    }
+  ]
+}

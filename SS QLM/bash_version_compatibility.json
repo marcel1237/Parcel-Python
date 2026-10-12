@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Cross-Platform Bash Stability",
+  "category": "Compatibility",
+  "entries": [
+    {
+      "principle": "Avoiding Bash-isms in POSIX Scripts",
+      "bad_example": "[[ $var == \"val\" ]]",
+      "good_example": "[ \"$var\" = \"val\" ]",
+      "rationale": "If a script is marked #!/bin/sh, it must not use double brackets or other Bash-only syntax. SS QLM mandates strictly checking the shebang against the features used."
+    },
+    {
+      "principle": "Minimum Version Enforcer",
+      "bad_example": "# Assumes bash 4.0+",
+      "good_example": "if (( BASH_VERSINFO[0] < 4 )); then echo \"Error: Bash 4.0+ required\"; exit 1; fi",
+      "rationale": "Features like associative arrays or case-conversion (${var,,}) require Bash 4.0+. SS QLM requires an explicit version check to prevent obscure syntax errors on older systems."
+    }
+  ]
+}

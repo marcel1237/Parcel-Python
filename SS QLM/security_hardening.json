@@ -1,0 +1,25 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Security First",
+  "category": "Hardening",
+  "entries": [
+    {
+      "threat": "Command Injection",
+      "bad_example": "eval \"ls $USER_INPUT\"",
+      "good_example": "# Avoid eval. Use arrays or direct calls.\nls -- \"$USER_INPUT\"",
+      "rationale": "Eval is the primary vector for injection. SS QLM strictly bans eval unless no other programmatic path exists, and even then, requiring rigorous input sanitization."
+    },
+    {
+      "threat": "Insecure Temp Files",
+      "bad_example": "echo \"data\" > /tmp/myscript_temp",
+      "good_example": "TMPFILE=$(mktemp /tmp/ssqlm.XXXXXX) || exit 1\ntrap 'rm -f \"$TMPFILE\"' EXIT",
+      "rationale": "Predictable filenames in /tmp allow symlink attacks. mktemp ensures unique, protected files, and traps ensure cleanup."
+    },
+    {
+      "threat": "Privilege Escalation",
+      "bad_example": "sudo chmod 777 /config/file",
+      "good_example": "chmod 600 /config/file\nchown $(id -u):$(id -g) /config/file",
+      "rationale": "Permissive bits are lazy and dangerous. Least privilege (600/644) is the SS QLM standard."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "User Interaction and Dialog Patterns",
+  "category": "Interactions",
+  "entries": [
+    {
+      "capability": "Centralized Dialog Service",
+      "patterns": ["mostrar alerta", "caixa de diálogo", "dialog service"],
+      "logic": "Encapsulates the creation and display of system alerts (Information, Warning, Error) in a specialized service. Uses JavaFX Alert API.",
+      "implementation": "Alert alert = new Alert(AlertType.INFORMATION); alert.showAndWait();",
+      "rationale": "Separates the UI notification logic from the view, allowing for easier testing and a consistent look-and-feel for all system messages."
+    },
+    {
+      "capability": "Standard About Dialog",
+      "patterns": ["janela sobre", "versão do app", "informações do sistema"],
+      "logic": "Triggers an information dialog from the Help menu or Welcome pane, displaying app name, version, and description metadata.",
+      "implementation": "aboutItem.setOnAction(e -> dialogService.showInformation(\"About\", context.getVersion()));",
+      "rationale": "Provides a predictable way for users to verify system status and build information, a key requirement for SSQLM observability."
+    }
+  ]
+}

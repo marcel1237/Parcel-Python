@@ -1,0 +1,25 @@
+{
+  "model_name": "SS QLM",
+  "focus": "High-Reliability Input/Output",
+  "category": "File Operations",
+  "entries": [
+    {
+      "pattern": "Atomic File Writing",
+      "bad_example": "cat > final_file.txt <<'EOF'\ncontent\nEOF",
+      "good_example": "TEMP_FILE=$(mktemp)\ncat > \"$TEMP_FILE\" <<'EOF'\ncontent\nEOF\nmv \"$TEMP_FILE\" \"final_file.txt\"",
+      "rationale": "Directly writing to a production file risks corruption if the process crashes. Using mktemp + mv ensures atomic consistency."
+    },
+    {
+      "pattern": "Surgical Patching (The 'Extraordinary Cat' Pattern)",
+      "bad_example": "sed -i 's/old/new/g' file.txt",
+      "good_example": "patch_file() {\n    local target=\"$1\" start=\"$2\" end=\"$3\" temp=$(mktemp)\n    sed -n \"1,/$start/p\" \"$target\" > \"$temp\"\n    cat >> \"$temp\" # Injects from stdin\n    sed -n \"/$end/,$ p\" \"$target\" >> \"$temp\"\n    mv \"$temp\" \"$target\"\n}",
+      "rationale": "Regex substitution (sed -i) is brittle and hard to read for multi-line blocks. The SS QLM pattern uses markers and Heredocs for clear, block-based modifications."
+    },
+    {
+      "pattern": "Safe Path Resolution",
+      "bad_example": "cd ../libs && ./build.sh",
+      "good_example": "readonly SCRIPT_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" &>/dev/null && pwd)\"\ncd \"$SCRIPT_DIR/../libs\" || exit 1",
+      "rationale": "Scripts relying on relative paths fail when called from different directories. Resolving the absolute script origin is mandatory for stability."
+    }
+  ]
+}

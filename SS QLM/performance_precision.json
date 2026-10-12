@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Efficiency and Precision",
+  "category": "Performance",
+  "entries": [
+    {
+      "optimization": "Avoiding Subshells",
+      "bad_example": "for i in $(cat list.txt); do ... done",
+      "good_example": "while IFS= read -r line; do\n    ...\ndone < list.txt",
+      "rationale": "The $(...) syntax spawns subshells and consumes massive memory for large files. Reading line-by-line via stream redirection is efficient."
+    },
+    {
+      "optimization": "Bash Built-ins vs External Tools",
+      "bad_example": "EXT=$(echo $FILE | cut -d'.' -f2)",
+      "good_example": "EXT=\"${FILE##*.}\"",
+      "rationale": "External binary calls (cut, sed, awk) are slow inside loops. SS QLM prioritizes parameter expansion for high-speed string manipulation."
+    }
+  ]
+}

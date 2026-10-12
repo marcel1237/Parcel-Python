@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Consistent and Protected Version Control",
+  "category": "Git",
+  "entries": [
+    {
+      "principle": "Main Branch Immunity",
+      "bad_example": "git commit -m \"fix\"",
+      "good_example": "CURRENT_BRANCH=$(git branch --show-current)\nif [[ \"$CURRENT_BRANCH\" == \"main\" ]]; then echo \"Forbidden\"; exit 1; fi",
+      "rationale": "Accidental commits to protected branches disrupt CI/CD. SS QLM mandates local branch verification before allowing write operations."
+    },
+    {
+      "principle": "Semantic Commit Integrity",
+      "bad_example": "git commit -m \"changes\"",
+      "good_example": "[[ \"$MSG\" =~ ^(feat|fix|docs|style|refactor|test|chore): .+$ ]] || exit 1",
+      "rationale": "Poorly described changes make debugging impossible. SS QLM standardizes semantic commit messages for automated changelog generation."
+    }
+  ]
+}

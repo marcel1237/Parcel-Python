@@ -1,0 +1,35 @@
+{
+  "model_name": "SS QLM",
+  "focus": "UI/UX Design Patterns and Layouts",
+  "category": "Design",
+  "entries": [
+    {
+      "capability": "Standard Application Layout",
+      "patterns": ["layout principal", "main window", "estrutura ui"],
+      "logic": "Uses BorderPane as the primary container. Top: Menubar + Toolbar. Center: SplitPane (Navigation + Workspace). Bottom: StatusBar.",
+      "implementation": "BorderPane root = new BorderPane(); root.setTop(vboxWithMenuAndToolbar); root.setCenter(splitPane);",
+      "rationale": "Provides a consistent and familiar IDE-like experience, optimized for productivity and space management."
+    },
+    {
+      "capability": "Modular Navigation Sidebar",
+      "patterns": ["sidebar", "navegação lateral", "painel esquerdo"],
+      "logic": "A fixed-width or resizable pane (SplitPane) on the left side, containing project trees or category navigation.",
+      "implementation": "navigationPane.setPrefWidth(220); splitPane.getItems().add(navigationPane);",
+      "rationale": "Separates context (navigation) from the primary action area (workspace), reducing cognitive load."
+    },
+    {
+      "capability": "Responsive Status Bar",
+      "patterns": ["barra de status", "status bar", "info inferior"],
+      "logic": "An HBox containing status messages on the left and metadata (like version) on the right, separated by an adaptive spacer.",
+      "implementation": "HBox.setHgrow(spacer, Priority.ALWAYS); HBox statusBar = new HBox(status, spacer, version);",
+      "rationale": "Ensures critical application state is always visible without interrupting the user workflow."
+    },
+    {
+      "capability": "Centered Welcome/Dashboard Pane",
+      "patterns": ["tela inicial", "welcome pane", "dashboard inicial"],
+      "logic": "A VBox with centered alignment (Pos.CENTER) containing high-level project actions and branding. Typically set as the initial 'Center' node of the Workspace.",
+      "implementation": "setAlignment(Pos.CENTER); setSpacing(20); getChildren().addAll(title, version, newBtn, openBtn);",
+      "rationale": "Guides the user during the first launch, providing clear entry points to primary application features."
+    }
+  ]
+}

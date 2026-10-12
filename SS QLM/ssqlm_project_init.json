@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Initial Project Structure and Build Config",
+  "category": "Project_Initialization",
+  "entries": [
+    {
+      "capability": "Standard Java Directory Layout",
+      "patterns": ["estrutura de pastas", "diretórios java", "maven structure"],
+      "logic": "Follows the standard Maven structure: src/main/java for code, src/main/resources for assets, and src/test/java for unit tests.",
+      "implementation": "mkdir -p src/main/java/$PACKAGE src/main/resources src/test/java",
+      "rationale": "Aligns with industry standards, ensuring compatibility with all major Java IDEs and build tools."
+    },
+    {
+      "capability": "Atomic Maven POM Generation",
+      "patterns": ["gerar pom.xml", "configurar maven", "pom standard"],
+      "logic": "Generates a complete pom.xml file using CAT with quoted Heredoc (<<'EOF') to ensure no shell expansion occurs within the XML tags.",
+      "implementation": "cat > pom.xml <<'EOF'\n<project>...</project>\nEOF",
+      "rationale": "Guarantees that the generated build configuration is bit-identical to the template, preventing injection errors."
+    }
+  ]
+}

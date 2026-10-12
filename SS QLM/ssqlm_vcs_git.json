@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "VCS and Git Lifecycle Management",
+  "category": "Git_Ops",
+  "entries": [
+    {
+      "utility": "Merged Branch Purge",
+      "patterns": ["limpar git", "apagar branches", "git cleanup"],
+      "logic": "Automatically identifies and deletes local branches that have already been integrated into the main branch.",
+      "implementation": "git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d",
+      "rationale": "Keeps the local development environment lean and prevents naming collisions."
+    },
+    {
+      "utility": "Git Commit Integrity",
+      "patterns": ["verificar git", "status limpo", "git health"],
+      "logic": "Checks for uncommitted changes and mandatory SSQLM headers before allowing a release build.",
+      "implementation": "[[ -z $(git status --porcelain) ]] || echo \"❌ Error: Dirty working tree\"",
+      "rationale": "Ensures that every compiled binary corresponds to a specific, immutable commit hash."
+    }
+  ]
+}

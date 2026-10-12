@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Clean Exit and Resource Cleanup",
+  "category": "Process Management",
+  "entries": [
+    {
+      "pattern": "Graceful Termination Trap",
+      "bad_example": "# no cleanup logic",
+      "good_example": "cleanup() { echo \"Removing temp files...\"; rm -f \"$TMP\"; exit; }\ntrap cleanup SIGINT SIGTERM EXIT",
+      "rationale": "Scripts interrupted by Ctrl+C or system shutdown often leave orphaned files or locked databases. SS QLM requires a unified cleanup function attached to termination signals."
+    },
+    {
+      "pattern": "Subprocess Lifecycle Tracking",
+      "bad_example": "./worker.sh &",
+      "good_example": "./worker.sh & worker_pid=$!\ntrap 'kill $worker_pid 2>/dev/null' EXIT",
+      "rationale": "Background jobs can become zombies if the parent script dies. SS QLM mandates capturing PIDs and ensuring they are terminated when the parent exits."
+    }
+  ]
+}

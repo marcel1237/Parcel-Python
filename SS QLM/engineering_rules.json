@@ -1,0 +1,10 @@
+{
+  "standard": "SSQLM v1.0",
+  "mandatory_header": "#!/usr/bin/env bash\nset -Eeuo pipefail",
+  "atomic_write": "Enabled",
+  "rules": [
+    {"target": "eval", "status": "forbidden", "reason": "Security risk"},
+    {"target": "rm -rf $VAR", "status": "forbidden", "reason": "Missing quotes risk"},
+    {"target": "cat >", "status": "restricted", "use_instead": "atomic_patcher"}
+  ]
+}

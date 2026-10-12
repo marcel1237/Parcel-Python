@@ -1,0 +1,20 @@
+{
+  "category": "ProjectManagement",
+  "rules": [
+    {
+      "patterns": ["compilar", "build", "buildar", "montar projeto"],
+      "response": "Iniciando processo de build via CMake. Certifique-se de que todas as novas classes foram adicionadas ao CMakeLists.txt para que o AUTOMOC as processe corretamente.",
+      "intent": "BUILD_PROJECT"
+    },
+    {
+      "patterns": ["rodar", "run", "executar ide"],
+      "response": "Executando o binário 'Parcel C++'. Lembre-se de verificar o painel de Logs/Logcat se a interface não carregar como esperado.",
+      "intent": "RUN_PROJECT"
+    },
+    {
+      "patterns": ["exportar", "pacote", "gerar deb", "gerar rpm"],
+      "response": "O motor de exportação extraordinária suporta .deb, .rpm e AppImage. Posso gerar o script de empacotamento baseado nos templates SSQLM para você.",
+      "intent": "EXPORT_PROJECT"
+    }
+  ]
+}

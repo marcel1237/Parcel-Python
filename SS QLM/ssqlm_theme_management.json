@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Dynamic Theming and Visual Identity",
+  "category": "Appearance",
+  "entries": [
+    {
+      "capability": "Centralized Theme Manager",
+      "patterns": ["mudar tema", "dracula theme", "theme manager"],
+      "logic": "Provides a static interface to switch between available User Agent Stylesheets (AtlantaFX). Encapsulates the switch/case logic for theme mapping.",
+      "implementation": "Application.setUserAgentStylesheet(new Dracula().getUserAgentStylesheet());",
+      "rationale": "Maintains visual consistency across the entire application and allows for user-selectable themes without reloading the JVM."
+    },
+    {
+      "capability": "Theme Type Enumeration",
+      "patterns": ["lista de temas", "theme type"],
+      "logic": "Uses a strongly-typed Enum (ThemeType) to define supported themes, preventing invalid theme strings.",
+      "implementation": "public enum ThemeType { DRACULA, NORD_DARK, ... }",
+      "rationale": "Enables type-safety and IDE autocompletion for theme selection, reducing runtime errors."
+    }
+  ]
+}

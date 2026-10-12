@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Bounded Parallel Processing",
+  "category": "Performance",
+  "entries": [
+    {
+      "capability": "Controlled Parallel Loop",
+      "patterns": ["processar em paralelo", "multi-thread bash", "background jobs"],
+      "logic": "Uses a 'while' loop with 'jobs -p' to monitor the number of concurrent background processes and throttle execution.",
+      "implementation": "while [[ $(jobs -p | wc -l) -ge $MAX ]]; do wait -n; done &",
+      "rationale": "Prevents system resource exhaustion (Fork Bomb) while maximizing throughput for heavy batch operations."
+    },
+    {
+      "capability": "Background Job Finalization",
+      "patterns": ["esperar processos", "wait jobs"],
+      "logic": "Always uses the 'wait' command after a parallel loop to ensure all background tasks are completed before the script continues or exits.",
+      "implementation": "wait && echo 'All done'",
+      "rationale": "Essential for SSQLM reliability to ensure no orphan processes are left behind."
+    }
+  ]
+}

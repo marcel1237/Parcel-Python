@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Automated Utility Operations",
+  "category": "Utilities",
+  "entries": [
+    {
+      "utility": "Bulk Renamer",
+      "patterns": ["renomear arquivos", "bulk rename", "adicionar prefixo"],
+      "logic": "Iterates through files in a directory and applies a prefix or suffix using 'mv'.",
+      "implementation": "for file in *; do mv \"$file\" \"${PREFIX}${file}\"; done",
+      "rationale": "Enables quick batch processing of assets and source files during project migrations."
+    },
+    {
+      "utility": "Project Vacuum",
+      "patterns": ["limpar build", "vacuum", "deletar temporários"],
+      "logic": "Safely removes build artifacts and cache files to free space and prepare for a clean build.",
+      "implementation": "rm -rf build/ bin/ out/ target/ && find . -name '*.tmp' -delete",
+      "rationale": "Core maintenance task to prevent stale binary issues and reduce project size."
+    }
+  ]
+}

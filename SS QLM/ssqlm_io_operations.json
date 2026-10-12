@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "High-Reliability I/O Operations",
+  "category": "IO_Optimization",
+  "entries": [
+    {
+      "capability": "Cat-Guard Check (Idempotency)",
+      "patterns": ["configurar ambiente", "adicionar bashrc", "idempotent append"],
+      "logic": "Combines 'grep' with 'cat >>' to ensure that a configuration block is only written once. Prevents system pollution.",
+      "implementation": "grep -q \"$ID\" \"$FILE\" || cat >> \"$FILE\" <<EOF\n# ...\nEOF",
+      "rationale": "Standard SSQLM approach for persistent system modifications."
+    },
+    {
+      "capability": "Atomic Template Generation",
+      "patterns": ["gerar template", "cat atomic"],
+      "logic": "Uses 'cat' into a 'mktemp' file followed by a 'mv' to ensure filesystem atomicity.",
+      "implementation": "tmp=$(mktemp) && cat > \"$tmp\" <<'EOF'\n[CONTENT]\nEOF\n && mv \"$tmp\" \"$TARGET\"",
+      "rationale": "Prevents half-written files if the script is interrupted (Power loss, SIGINT)."
+    }
+  ]
+}

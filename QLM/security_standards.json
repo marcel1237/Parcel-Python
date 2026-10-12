@@ -1,0 +1,15 @@
+{
+  "category": "SecurityStandards",
+  "rules": [
+    {
+      "patterns": ["segurança", "proteção", "permissão", "chmod", "secret"],
+      "response": "Segurança no SSQLM significa: 1. Nunca hardcodar senhas. 2. Usar arquivos temporários seguros (mktemp). 3. Aplicar permissões restritas (600) em segredos. Posso auditar seu script em busca de falhas.",
+      "intent": "SECURITY_AUDIT"
+    },
+    {
+      "patterns": ["vazamento", "leak", "senha"],
+      "response": "Detectei preocupação com vazamentos. Recomendo adicionar arquivos .env e .key ao .gitignore imediatamente. Posso gerar o arquivo .gitignore padrão para você.",
+      "intent": "LEAK_PREVENTION"
+    }
+  ]
+}

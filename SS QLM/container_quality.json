@@ -1,0 +1,25 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Production-Grade Container Automation",
+  "category": "Containerization",
+  "entries": [
+    {
+      "principle": "Ephemeral Environment Isolation",
+      "bad_example": "docker run -d my-app",
+      "good_example": "docker run --rm -it --name \"${CONTAINER_NAME}\" -v \"${PWD}:/workspace\" \"${IMAGE_TAG}\"",
+      "rationale": "Container sprawl wastes resources. SS QLM standardizes the use of '--rm' for development tasks and explicit naming for lifecycle tracking."
+    },
+    {
+      "principle": "Safe Secret Injection",
+      "bad_example": "docker run -e DB_PASSWORD=123 my-db",
+      "good_example": "docker run --env-file .env.secret my-db",
+      "rationale": "Passing secrets as environment variables in the command line exposes them to 'ps' and shell history. SS QLM mandates the use of protected env-files or secret mounts."
+    },
+    {
+      "principle": "Health-Check Synchronization",
+      "bad_example": "docker-compose up && ./run-tests.sh",
+      "good_example": "docker-compose up -d\n./wait-for-it.sh db:5432 -- timeout=30 -- ./run-tests.sh",
+      "rationale": "Race conditions occur when the orchestration completes before the service is ready. SS QLM requires explicit port/health polling before dependent execution."
+    }
+  ]
+}

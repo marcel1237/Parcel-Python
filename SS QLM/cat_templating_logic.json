@@ -1,0 +1,28 @@
+{
+  "model_name": "SS QLM",
+  "focus": "High-Fidelity Code Templating",
+  "category": "Templating",
+  "entries": [
+    {
+      "method": "Structural Integrity Injections",
+      "context": "Generating complex XML (pom.xml) or Source Code (.java)",
+      "bad_example": "echo '<version>1.0</version>' >> pom.xml",
+      "good_example": "cat > pom.xml <<'EOF'\n<project>\n    <modelVersion>4.0.0</modelVersion>\n    <!-- Structural precision via CAT -->\n</project>\nEOF",
+      "rationale": "Code structures like XML or Java require indentation and indentation preservation. 'cat' preserves all whitespaces exactly as written in the script, ensuring the generated code is immediately valid and readable by other tools."
+    },
+    {
+      "method": "Dynamic Heredocs (Intentional Expansion)",
+      "context": "When the script *must* inject local variables into the output",
+      "bad_example": "cat > script.sh <<'EOF'\necho $LOCAL_PATH\nEOF",
+      "good_example": "cat > script.sh <<EOF\n# Generated on $(date)\nexport PROJECT_ROOT=\"${PWD}\"\nEOF",
+      "rationale": "SS QLM distinguishes between 'Literal' and 'Interpolated' Heredocs. While <<'EOF' is the default for safety, the model uses <<EOF (unquoted) when specific environment values must be baked into the resulting artifact."
+    },
+    {
+      "method": "Stream Concatenation",
+      "context": "Building a file from multiple sources",
+      "bad_example": "cat part1.txt > final.txt; cat part2.txt >> final.txt",
+      "good_example": "cat header.txt - footer.txt > final.txt <<'EOF'\n# MIDDLE CONTENT INJECTED VIA CAT\nEOF",
+      "rationale": "The use of '-' in 'cat' allows mixing physical files with live standard input in a single command, creating a powerful, unified stream for complex file assembly."
+    }
+  ]
+}

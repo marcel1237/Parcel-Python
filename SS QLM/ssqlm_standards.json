@@ -1,0 +1,35 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Standard Operating Procedures (SOP)",
+  "category": "Standardization",
+  "entries": [
+    {
+      "capability": "Atomic File Generation",
+      "patterns": ["gerar arquivo", "criação atômica", "atomic write"],
+      "logic": "Use mktemp to create a temporary file, populate it via CAT, and then use 'mv' to overwrite the target. This prevents partial writes.",
+      "implementation": "temp=$(mktemp) && cat > \"$temp\" <<'EOF'\n[CONTENT]\nEOF\n && mv \"$temp\" \"$target\"",
+      "rationale": "Ensures that a file is either fully written or not written at all, maintaining system integrity."
+    },
+    {
+      "capability": "Surgical Patching",
+      "patterns": ["patch", "cirurgia de código", "injetar bloco"],
+      "logic": "Locate BEGIN/END markers in a file. Extract parts before and after, then combine with new content in the middle using CAT.",
+      "implementation": "sed -n '1,/BEGIN/p' file > temp && cat >> temp && sed -n '/END/,$p' file >> temp && mv temp file",
+      "rationale": "Allows for precise, automated modifications to source files without risk of manual editing errors."
+    },
+    {
+      "capability": "Idempotent Append",
+      "patterns": ["adicionar se não existir", "append inteligente", "idempotência"],
+      "logic": "Check if a string or marker exists in the file before performing a CAT append.",
+      "implementation": "grep -q \"$MARKER\" \"$FILE\" || cat >> \"$FILE\" <<'EOF'\n[CONTENT]\nEOF",
+      "rationale": "Prevents duplicate entries and ensures scripts can be run multiple times safely."
+    },
+    {
+      "capability": "String Engine Precision",
+      "patterns": ["manipulação de string", "escapar caracteres", "string engine"],
+      "logic": "Always use quoted Heredocs (<<'EOF') when the content contains variables that should NOT be expanded by the shell during injection.",
+      "implementation": "cat <<'EOF' > output.sh\n# $VAR will be literal\nEOF",
+      "rationale": "Critical for code generation where the generated code itself contains shell variables or special syntax."
+    }
+  ]
+}

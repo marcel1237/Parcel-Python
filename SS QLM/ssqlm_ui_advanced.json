@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Advanced Modular UI Components",
+  "category": "UI_Expansion",
+  "entries": [
+    {
+      "capability": "Modern Button Sidebar",
+      "patterns": ["criar sidebar moderna", "navegação vertical", "botões sidebar"],
+      "logic": "Implements a VBox-based sidebar with full-width buttons, separators, and a bottom-aligned version info via VGrow spacer.",
+      "implementation": "VBox spacer = new VBox(); VBox.setVgrow(spacer, Priority.ALWAYS); getChildren().add(spacer);",
+      "rationale": "Maximized space utility and clear hierarchical navigation, following the Parcel 2.0 design system."
+    },
+    {
+      "capability": "Full-Width UI Button",
+      "patterns": ["botão largo", "expand button", "max width btn"],
+      "logic": "Ensures buttons in sidebars or forms take up all available horizontal space.",
+      "implementation": "button.setMaxWidth(Double.MAX_VALUE); button.setPrefHeight(36);",
+      "rationale": "Improved touch/click target area and visual consistency in structured layouts."
+    }
+  ]
+}

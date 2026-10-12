@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Resilient Network Operations",
+  "category": "Networking",
+  "entries": [
+    {
+      "principle": "Retry with Exponential Backoff",
+      "bad_example": "curl http://api.com/data",
+      "good_example": "fetch_data() { local retry=0; until curl --fail -s \"$1\"; do ((retry++)); [[ $retry -gt 3 ]] && exit 1; sleep $((2**retry)); done; }",
+      "rationale": "Network calls are flaky. SS QLM mandates retry logic with increasing wait times to prevent overwhelming the target service while ensuring delivery."
+    },
+    {
+      "principle": "Safe JSON Parsing",
+      "bad_example": "VERSION=$(curl ... | grep -o 'version\": \"[^\"]*' | cut -d'\"' -f3)",
+      "good_example": "VERSION=$(curl -s ... | jq -r '.version') || { echo \"Failed to parse JSON\"; exit 1; }",
+      "rationale": "Parsing JSON with grep/sed is brittle and breaks with structural changes. SS QLM standardizes 'jq' for reliable, schema-aware data extraction."
+    }
+  ]
+}

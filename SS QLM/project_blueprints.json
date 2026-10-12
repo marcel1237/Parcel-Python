@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Project Scaffolding and Blueprints",
+  "category": "Blueprints",
+  "entries": [
+    {
+      "blueprint": "ProjectWizard (JavaFX)",
+      "patterns": ["criar projectwizard", "scaffold javafx", "novo projeto java"],
+      "logic": "Generates a complete JavaFX project structure with Maven (pom.xml), Main class, and README.",
+      "implementation": "mkdir -p src/main/java/com/projectwizard && cat > pom.xml <<'EOF' ...",
+      "rationale": "Uses SSQLM 'cat' standard to ensure consistent boilerplate generation across different environments."
+    },
+    {
+      "blueprint": "SSQLM Micro-Service",
+      "patterns": ["criar micro-serviço", "novo service shell"],
+      "logic": "Creates a modular shell service with automatic logging and error trapping.",
+      "implementation": "cat > service.sh <<'EOF'\n#!/usr/bin/env bash\nset -Eeuo pipefail\n# Logic here\nEOF",
+      "rationale": "Standardizes the creation of background workers in the Parcel environment."
+    }
+  ]
+}

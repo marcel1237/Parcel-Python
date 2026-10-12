@@ -1,0 +1,25 @@
+{
+  "category": "FileOperations",
+  "rules": [
+    {
+      "patterns": ["analise", "analyze", "auditoria", "verificar", "check"],
+      "action": "ANALYZE",
+      "hint": "Performing SSQLM Audit on requested file."
+    },
+    {
+      "patterns": ["reconstruct", "arquiteto", "reconstruir", "criar"],
+      "action": "RECONSTRUCT",
+      "hint": "Applying Architect Pattern: Full file reconstruction."
+    },
+    {
+      "patterns": ["patch", "surgical", "cirúrgico", "remendar"],
+      "action": "PATCH",
+      "hint": "Applying Surgeon Pattern: Precision block replacement."
+    },
+    {
+      "patterns": ["append", "adicionar", "incluir"],
+      "action": "APPEND",
+      "hint": "Applying Integrator Pattern: Smart content addition."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Surgical Repairs and Emergency Fixes",
+  "category": "Repair",
+  "entries": [
+    {
+      "capability": "StatusBar Layout Fix",
+      "patterns": ["corrigir statusbar", "fix status bar", "alinhar status"],
+      "logic": "Ensures the StatusBar is wrapped in an HBox with proper padding and alignment, preventing visual glitches at the bottom of the window.",
+      "implementation": "HBox statusBar = new HBox(statusLabel);\nstatusBar.setPadding(new Insets(6,10,6,10));\nstatusBar.setAlignment(Pos.CENTER_LEFT);",
+      "rationale": "Direct layout injection via CAT ensures the UI remains consistent even after partial failures in previous build steps."
+    },
+    {
+      "capability": "Project Skeleton Rebuild",
+      "patterns": ["reconstruir esqueleto", "full project fix"],
+      "logic": "Emergency procedure that wipes the 'build/' directory and re-generates core project files (pom.xml, Main) to resolve corrupted build states.",
+      "implementation": "rm -rf build/ && generate_pom && generate_main",
+      "rationale": "High-fidelity SSQLM recovery method when incremental patches fail to resolve deep structural issues."
+    }
+  ]
+}

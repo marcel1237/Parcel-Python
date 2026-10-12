@@ -1,0 +1,25 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Pure Bash String Engineering",
+  "category": "String Manipulation",
+  "entries": [
+    {
+      "method": "Parameter Expansion over Command Substitution",
+      "bad_example": "filename=$(basename \"$path\")\nextension=$(echo \"$filename\" | cut -d'.' -f2)",
+      "good_example": "filename=\"${path##*/}\"\nextension=\"${filename##*.}\"",
+      "rationale": "Command substitution $(...) forks a new process, which is expensive in loops. SS QLM mandates using Bash's internal parameter expansion for O(1) performance and process-less execution."
+    },
+    {
+      "method": "Pattern Search and Replace",
+      "bad_example": "new_var=$(echo \"$var\" | sed 's/old/new/g')",
+      "good_example": "new_var=\"${var//old/new}\"",
+      "rationale": "External calls to 'sed' for simple global replacement are unnecessary. Internal syntax '${var//search/replace}' is faster and safer as it avoids shell-escaping issues inherent in pipe streams."
+    },
+    {
+      "method": "Zero-Process Trimming",
+      "bad_example": "trimmed=$(echo \"$var\" | xargs)",
+      "good_example": "trimmed_var=\"${var#${var%%[![:space:]]*}}\" # Leading\ntrimmed_var=\"${trimmed_var%${trimmed_var##*[![:space:]]}}\" # Trailing",
+      "rationale": "SS QLM standardizes trimming without external binaries, ensuring scripts remain responsive even when handling thousands of variables per second."
+    }
+  ]
+}

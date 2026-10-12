@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Architectural Patterns and Service Layer",
+  "category": "Architecture",
+  "entries": [
+    {
+      "capability": "Service Layer Pattern",
+      "patterns": ["camada de serviço", "service layer", "arquitetura java"],
+      "logic": "Separates business logic into specialized Service classes. Each service handles a specific domain (Dialog, FileSystem, Settings, Project).",
+      "implementation": "public class DialogService { ... } // Used via ApplicationContext",
+      "rationale": "Promotes high maintainability and testability by decoupling UI from business logic, a core SSQLM principle."
+    },
+    {
+      "capability": "Centralized Application Context",
+      "patterns": ["application context", "contexto da aplicação", "gerenciar serviços"],
+      "logic": "A singleton-like container that instantiates and provides access to all active services throughout the application lifecycle.",
+      "implementation": "public class ApplicationContext { private final DialogService dialogService; ... }",
+      "rationale": "Simplifies dependency management and provides a single source of truth for the application state."
+    }
+  ]
+}

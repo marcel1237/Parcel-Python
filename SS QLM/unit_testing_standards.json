@@ -1,0 +1,19 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Automated Logic Verification",
+  "category": "Testing",
+  "entries": [
+    {
+      "principle": "Function-Level Isolation",
+      "bad_example": "# Just run the whole script and check output",
+      "good_example": "source \"./myscript.sh\"\ntest_slugify() {\n    local result=$(create_slug \"Hello World\")\n    [[ \"$result\" == \"hello-world\" ]] || return 1\n}",
+      "rationale": "SS QLM treats Shell as a first-class language. Unit testing individual functions by sourcing the script is mandatory for CI/CD confidence."
+    },
+    {
+      "principle": "Mocking External Binaries",
+      "bad_example": "test_disk_check() { # runs real df -h }",
+      "good_example": "df() { echo \"/dev/sda1 100% 100% 0% /mnt\"; }\n# Now test how the script handles 100% full disk",
+      "rationale": "Tests should not depend on hardware or environment state. SS QLM encourages 'Shadow Function Mocking' to simulate failures (disk full, network down, etc.)."
+    }
+  ]
+}

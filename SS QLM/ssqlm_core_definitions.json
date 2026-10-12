@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Core Application Logic and Versioning",
+  "category": "Core_Patterns",
+  "entries": [
+    {
+      "capability": "Immutable Constants",
+      "patterns": ["definir constantes", "application name", "final class constants"],
+      "logic": "Uses final classes with private constructors to store application-wide strings and settings. Prevents instantiation.",
+      "implementation": "public final class Constants { private Constants(){} public static final String NAME = \"...\"; }",
+      "rationale": "Ensures a type-safe and non-instantiable way to manage global configuration, adhering to clean code standards."
+    },
+    {
+      "capability": "Semantic Versioning Management",
+      "patterns": ["versão do sistema", "versioning", "semantic version"],
+      "logic": "Isolates the version string in a dedicated Version class. This simplifies automated updates and build metadata extraction.",
+      "implementation": "public final class Version { public static final String VERSION = \"0.1.0\"; }",
+      "rationale": "Decouples version tracking from business logic, facilitating CI/CD integration and release management."
+    }
+  ]
+}

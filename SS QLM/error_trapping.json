@@ -1,0 +1,13 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Advanced Error Handling",
+  "category": "Diagnostics",
+  "entries": [
+    {
+      "method": "The SS QLM Diagnostic Trap",
+      "bad_example": "exit 1",
+      "good_example": "error_exit() {\n    local line=$1\n    local code=$2\n    echo \"[SS QLM FATAL] Error on line ${line}: Exit code ${code}\"\n    # Logic for rollback\n    exit \"$code\"\n}\ntrap 'error_exit ${LINENO} $?' ERR",
+      "rationale": "Generic exits provide zero debugging info. A global ERR trap with line reporting allows developers to pinpoint failures in production immediately."
+    }
+  ]
+}

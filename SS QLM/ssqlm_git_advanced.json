@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Advanced Git Operations and Workflow",
+  "category": "VCS_Advanced",
+  "entries": [
+    {
+      "capability": "Atomic Commit Strategy",
+      "patterns": ["fazer commit", "salvar no git", "git commit"],
+      "logic": "Ensures that each commit represents a single logical change. Standardizes the use of prefixes like [FEAT], [FIX], or [DOC].",
+      "implementation": "git add . && git commit -m \"[SSQLM] Auto-commit: {description}\"",
+      "rationale": "Facilitates code revert operations and maintains a clean, readable project history."
+    },
+    {
+      "capability": "Safe Branch Management",
+      "patterns": ["nova branch", "criar ramificação", "git flow"],
+      "logic": "Creates a new feature branch based on the latest stable state of the main branch.",
+      "implementation": "git checkout main && git pull && git checkout -b feat/{name}",
+      "rationale": "Prevents merge conflicts and ensures development happens in isolation from the production-ready code."
+    }
+  ]
+}

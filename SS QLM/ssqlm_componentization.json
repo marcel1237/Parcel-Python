@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "UI Componentization and Granularity",
+  "category": "Design_Architecture",
+  "entries": [
+    {
+      "capability": "Atomic UI Componentization",
+      "patterns": ["componentizar interface", "criar view modular", "extender pane"],
+      "logic": "Refactors monolithic UI code into smaller, reusable classes by extending native layout containers (StackPane, HBox, ToolBar).",
+      "implementation": "public class NavigationPane extends StackPane { ... }",
+      "rationale": "Enables isolation of UI logic, improves code readability, and allows for individual testing and styling of interface parts."
+    },
+    {
+      "capability": "View/Controller Separation",
+      "patterns": ["separar lógica de view", "show window"],
+      "logic": "Uses a dedicated class (e.g., MainWindow) to orchestrate the assembly of atomic components into a complete functional scene.",
+      "implementation": "root.setBottom(new StatusBar()); splitPane.getItems().add(new NavigationPane());",
+      "rationale": "Core SSQLM principle to maintain a clean main application file and facilitate large-scale UI evolution."
+    }
+  ]
+}

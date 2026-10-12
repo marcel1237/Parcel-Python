@@ -1,0 +1,21 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Dependency Resolution and Modular Coupling",
+  "category": "Dependency_Management",
+  "entries": [
+    {
+      "capability": "Internal Header Resolution",
+      "patterns": ["verificar dependências", "dependências internas", "check includes"],
+      "logic": "Scans for local include patterns (#include \"...\") and verifies if the targeted header exists in the src/ directory.",
+      "implementation": "grep -oE '#include \"[^\"]+\"' file.cpp",
+      "rationale": "Ensures that all local references are valid and prevents broken builds due to missing files."
+    },
+    {
+      "capability": "Circular Dependency Detection",
+      "patterns": ["dependência circular", "circular include"],
+      "logic": "Identifies if Header A includes Header B while Header B also includes Header A, a situation that causes compilation errors or infinite pre-processing.",
+      "implementation": "LocalAgent::checkCircularDependency(\"A.hpp\", \"B.hpp\")",
+      "rationale": "Maintains a clean directed acyclic graph (DAG) for the project structure, facilitating faster compilation."
+    }
+  ]
+}

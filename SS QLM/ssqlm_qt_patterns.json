@@ -1,0 +1,28 @@
+{
+  "model_name": "SS QLM",
+  "focus": "Qt/C++ UI Component Patterns",
+  "category": "Qt_Development",
+  "entries": [
+    {
+      "capability": "SSQLM Styled Button",
+      "patterns": ["gerar botão qt", "criar botão azul", "standard button"],
+      "logic": "Creates a QPushButton with the project's standard blue style and consistent padding.",
+      "implementation": "auto* btn = new QPushButton(\"Text\", this);\nbtn->setStyleSheet(\"background-color: #4285F4; color: white; font-weight: bold; padding: 8px 15px; border-radius: 4px;\");",
+      "rationale": "Maintains visual consistency across all panes of the Parcel IDE."
+    },
+    {
+      "capability": "Dark Mode Console Text",
+      "patterns": ["criar log view", "estilo console", "dark text edit"],
+      "logic": "Configures a QTextEdit to look like a terminal/console with fixed-width font and dark background.",
+      "implementation": "auto* log = new QTextEdit(this);\nlog->setReadOnly(true);\nlog->setStyleSheet(\"background-color: #0f111a; color: #adbac7; font-family: 'Monospace'; border: 1px solid #1e1e30;\");",
+      "rationale": "Ensures technical output is readable and fits the SSQLM aesthetic."
+    },
+    {
+      "capability": "SSQLM Header Label",
+      "patterns": ["gerar título", "label de cabeçalho", "header style"],
+      "logic": "Creates a QLabel styled as a section header with the signature cyan color.",
+      "implementation": "auto* header = new QLabel(\"TITLE\", this);\nheader->setStyleSheet(\"font-weight: bold; color: #00BFFF; font-size: 14px; margin-bottom: 5px;\");",
+      "rationale": "Standardizes the information hierarchy in the UI."
+    }
+  ]
+}
