@@ -1,0 +1,15 @@
+{
+  "category": "SystemInfo",
+  "rules": [
+    {
+      "patterns": ["versão", "version", "sobre a ide"],
+      "response": "Parcel C++ v2.0 'Ultimate Edition'. Equipada com Visual Designer, DBMS Multimotor, e o SS AI Agent com motor QLM de alta fidelidade.",
+      "intent": "VERSION_INFO"
+    },
+    {
+      "patterns": ["sistema", "ambiente", "diretório", "pasta raiz"],
+      "response": "Ambiente operacional: Linux/Ubuntu. Raiz do projeto sincronizada em /home/marcel1237/Parcel C++. Todas as operações de arquivo são atômicas e seguem os padrões POSIX.",
+      "intent": "ENV_INFO"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "category": "Productivity",
+  "rules": [
+    {
+      "patterns": ["atalho", "agilizar", "produtividade"],
+      "response": "Use 'Ctrl+Alt+F' no editor para Quick Fixes via AI, ou use as setas do teclado no Designer para posicionamento de precisão (1px). Shift+Setas movem 10px.",
+      "intent": "PROD_HACKS"
+    },
+    {
+      "patterns": ["automatizar", "template", "boilerplate"],
+      "response": "A Parcel C++ tem uma vasta galeria de templates SSQLM e Dear ImGui. Posso injetar um deles agora mesmo se você me disser qual o propósito do seu arquivo.",
+      "intent": "AUTO_TEMPLATING"
+    }
+  ]
+}

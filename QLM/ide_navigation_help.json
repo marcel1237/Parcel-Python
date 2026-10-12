@@ -1,0 +1,20 @@
+{
+  "category": "IDENavigation",
+  "rules": [
+    {
+      "patterns": ["onde fica o designer", "abrir designer", "como desenhar"],
+      "response": "O Visual Designer pode ser acessado clicando no ícone de 'Olho' ou 'Preview' no cabeçalho do projeto. Ele permite arrastar componentes Kirigami e gerar código QML instantaneamente.",
+      "intent": "NAV_DESIGNER"
+    },
+    {
+      "patterns": ["ver logs", "onde está o logcat", "mensagens do sistema"],
+      "response": "Abra o painel inferior e selecione a aba 'Logs' ou 'Logcat'. Lá você verá a saída em tempo real do compilador e do Agente SSAI.",
+      "intent": "NAV_LOGS"
+    },
+    {
+      "patterns": ["banco", "gerenciar banco", "onde está o db"],
+      "response": "A aba 'Banco de Dados' no painel inferior permite gerenciar conexões SQLite e DuckDB. Você também pode usar o 'DBMS Explorer' na barra lateral esquerda.",
+      "intent": "NAV_DATABASE"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "category": "Templates",
+  "rules": [
+    {
+      "patterns": ["aplique template", "usar template", "apply template", "modelo"],
+      "action": "APPLY_TEMPLATE",
+      "hint": "Iniciando aplicação de template SSQLM no arquivo em foco."
+    }
+  ]
+}

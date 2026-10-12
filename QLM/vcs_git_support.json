@@ -1,0 +1,15 @@
+{
+  "category": "GitSupport",
+  "rules": [
+    {
+      "patterns": ["git", "branch", "commit", "push", "pull", "vcs"],
+      "response": "Integridade no controle de versão é vital. Evite commits diretos na branch 'main'. Recomendo usar o padrão de 'Semantic Commits' (ex: 'feat: add ai console') para um histórico limpo.",
+      "intent": "VCS_GUIDANCE"
+    },
+    {
+      "patterns": ["conflito", "merge", "diff"],
+      "response": "Conflitos de merge podem ser resolvidos usando nossa ferramenta de Diff integrada. Posso analisar as diferenças entre versões para ajudar a decidir qual bloco manter.",
+      "intent": "VCS_CONFLICT"
+    }
+  ]
+}

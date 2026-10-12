@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+ENV/
+
+# Build & Distribution
+build/
+dist/
+*.pkg
+*.AppImage
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+
+# Database / Backups
+.parcel_backups.db
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store

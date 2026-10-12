@@ -1,0 +1,15 @@
+{
+  "category": "UIUXDesign",
+  "rules": [
+    {
+      "patterns": ["designer", "visual", "qml", "kirigami", "interface"],
+      "response": "O Visual Designer da Parcel C++ utiliza a tecnologia Kirigami da KDE. Recomendo usar 'Kirigami.FormLayout' para formulários limpos e 'Kirigami.Card' para organizar informações. Quer que eu gere um boilerplate de UI extraordinário?",
+      "intent": "UI_DESIGN_GUIDANCE"
+    },
+    {
+      "patterns": ["ícones", "icons", "tema", "estilo"],
+      "response": "A IDE segue o padrão Breeze Dark/Oxygen. Use ícones do sistema (ex: 'document-save', 'edit-undo') para garantir consistência visual nativa no Linux.",
+      "intent": "UX_STYLING"
+    }
+  ]
+}
