@@ -1,0 +1,10 @@
+{
+  "category": "PythonExecution",
+  "rules": [
+    {
+      "patterns": ["rode python", "run python", "executar python", "python script"],
+      "action": "PYTHON",
+      "hint": "Iniciando execução de roteiro Python em ambiente isolado."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "category": "ResourceUI",
+  "rules": [
+    {
+      "patterns": ["espaço em disco", "hd cheio", "memória ram", "processamento"],
+      "response": "A Parcel C++ monitora proativamente os recursos. Se o disco estiver com menos de 1GB, a IDE emitirá um alerta no Logcat. Você pode ver o status detalhado na aba 'System' do console do Agente.",
+      "intent": "RESOURCE_STATUS_HELP"
+    }
+  ]
+}

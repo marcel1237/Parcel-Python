@@ -1,0 +1,15 @@
+{
+  "category": "TroubleshootingUI",
+  "rules": [
+    {
+      "patterns": ["qml não carrega", "erro no designer", "tela branca"],
+      "response": "Verifique se o arquivo QML possui todos os imports necessários (ex: 'import org.kde.kirigami as Kirigami'). Se o erro persistir, limpe o cache do motor QML usando o botão de 'Recarregar'.",
+      "intent": "FIX_QML"
+    },
+    {
+      "patterns": ["ícone não aparece", "ícone quebrado"],
+      "response": "Certifique-se de que o nome do ícone segue o padrão FreeDesktop (ex: 'document-open'). Se for um ícone customizado, ele deve estar na pasta 'resource/'.",
+      "intent": "FIX_ICONS"
+    }
+  ]
+}

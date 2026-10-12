@@ -1,0 +1,15 @@
+{
+  "category": "ExtraordinaryCoding",
+  "rules": [
+    {
+      "patterns": ["padrão de projeto", "design pattern", "arquitetura"],
+      "response": "Para C++ na Parcel, recomendo o padrão de 'Sinais e Slots' para desacoplamento de UI e a 'Camada de Serviço' para lógica de negócio, seguindo o modelo do ProjectWizard.",
+      "intent": "ARCH_ADVICE"
+    },
+    {
+      "patterns": ["limpar código", "refatorar", "clean code"],
+      "response": "Posso realizar uma cirurgia de limpeza. Vou remover comentários obsoletos, garantir o uso de 'const' onde possível e padronizar o estilo SSQLM.",
+      "intent": "CLEAN_CODE"
+    }
+  ]
+}

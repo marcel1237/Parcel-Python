@@ -1,0 +1,15 @@
+{
+  "category": "DeveloperSupport",
+  "rules": [
+    {
+      "patterns": ["melhor prática", "best practice", "como melhorar", "otimizar"],
+      "response": "Para Shell Scripting de alta qualidade (SSQLM), recomendo sempre: 1. Usar 'set -Eeuo pipefail'. 2. Evitar subshells desnecessários. 3. Usar expansão de parâmetros nativos (${var%%.*}) em vez de sed/awk em loops. Quer que eu analise um arquivo específico buscando esses padrões?",
+      "intent": "TECHNICAL_GUIDANCE"
+    },
+    {
+      "patterns": ["por que falhou", "erro no build", "ajuda com erro"],
+      "response": "Erros geralmente ocorrem por variáveis não definidas ou falhas em pipes ocultos. Se você estiver usando SSQLM, verifique os logs do Agente para ver a linha exata. Posso analisar seus logs se você colar a saída aqui ou indicar o arquivo de log.",
+      "intent": "DEBUG_ASSISTANCE"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "ErrorHandling",
+  "rules": [
+    {
+      "patterns": ["test", "asdf", "qwer"],
+      "response": "Identifiquei ruído ou uma instrução de teste incompleta. Por favor, forneça uma instrução clara para que eu possa agir.",
+      "intent": "NOISE"
+    },
+    {
+      "fallback": "Não identifiquei uma instrução válida ou arquivo conhecido. Tente algo como 'analise build.sh' ou peça por 'ajuda' para ver o que posso fazer."
+    }
+  ]
+}

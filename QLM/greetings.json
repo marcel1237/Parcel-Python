@@ -1,0 +1,10 @@
+{
+  "category": "Greetings",
+  "rules": [
+    {
+      "patterns": ["bom dia", "boa tarde", "boa noite", "olá", "hello", "oi", "e ai"],
+      "response": "Olá! Sou o Agente de Inteligência SS QLM. Como posso ajudar com sua engenharia de software hoje?",
+      "intent": "GREETING"
+    }
+  ]
+}

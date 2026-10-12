@@ -1,0 +1,15 @@
+{
+  "category": "DatabaseGuidance",
+  "rules": [
+    {
+      "patterns": ["banco de dados", "db", "sql", "sqlite", "mongodb", "duckdb"],
+      "response": "A Parcel C++ possui suporte nativo a SQLite, DuckDB, Redis, RocksDB e MongoDB. Para segurança máxima, sempre utilize transações (BEGIN/COMMIT) ao realizar alterações de esquema.",
+      "intent": "DB_INTERACTION"
+    },
+    {
+      "patterns": ["migração", "tabela", "query"],
+      "response": "Posso gerar scripts de migração atômica para você. No SSQLM, garantimos que falhas no meio do processo não corrompam os dados do banco.",
+      "intent": "DB_MIGRATION"
+    }
+  ]
+}
