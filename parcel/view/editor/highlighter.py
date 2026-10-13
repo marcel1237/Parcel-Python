@@ -23,7 +23,7 @@ class ProjectHighlighter(QSyntaxHighlighter):
             self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), cpp_py_format))
 
         # ----------------------------------------------------
-        # 2. JavaScript / TypeScript (.js, .ts, .jsx, .tsx, .mjs, .cjs)
+        # 2. JavaScript / TypeScript (.js, .ts, .jsx, .tsx)
         # ----------------------------------------------------
         js_ts_format = QTextCharFormat()
         js_ts_format.setForeground(QColor("#E5C07B"))
@@ -82,13 +82,73 @@ class ProjectHighlighter(QSyntaxHighlighter):
         for word in php_keywords:
             self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b", QRegularExpression.PatternOption.CaseInsensitiveOption), php_format))
 
-        # PHP Variables ($variable)
-        php_var_format = QTextCharFormat()
-        php_var_format.setForeground(QColor("#E06C75"))
-        self.highlighting_rules.append((QRegularExpression(r"\$[a-zA-Z_][a-zA-Z0-9_]*"), php_var_format))
+        # ----------------------------------------------------
+        # 6. Ruby (.rb, .rake)
+        # ----------------------------------------------------
+        ruby_format = QTextCharFormat()
+        ruby_format.setForeground(QColor("#E06C75"))
+        ruby_format.setFontWeight(QFont.Weight.Bold)
+        ruby_keywords = [
+            "def", "class", "module", "require", "include", "attr_accessor",
+            "attr_reader", "attr_writer", "if", "else", "elsif", "end", "do",
+            "yield", "nil", "self", "super", "begin", "rescue", "ensure", "raise"
+        ]
+        for word in ruby_keywords:
+            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), ruby_format))
+
+        # Ruby / Perl / Raku Variables (@var, $var, %hash)
+        var_format = QTextCharFormat()
+        var_format.setForeground(QColor("#D19A66"))
+        self.highlighting_rules.append((QRegularExpression(r"[\$@%][a-zA-Z_][a-zA-Z0-9_]*"), var_format))
 
         # ----------------------------------------------------
-        # 6. Java & Kotlin / Groovy (.java, .groovy, .kt)
+        # 7. Perl & Raku (.pl, .pm, .raku)
+        # ----------------------------------------------------
+        perl_format = QTextCharFormat()
+        perl_format.setForeground(QColor("#61AFEF"))
+        perl_format.setFontWeight(QFont.Weight.Bold)
+        perl_keywords = [
+            "sub", "my", "our", "local", "use", "package", "return",
+            "unless", "while", "until", "for", "foreach", "print", "say", "chomp"
+        ]
+        for word in perl_keywords:
+            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), perl_format))
+
+        # ----------------------------------------------------
+        # 8. ASP & JSP (.asp, .aspx, .jsp)
+        # ----------------------------------------------------
+        asp_jsp_format = QTextCharFormat()
+        asp_jsp_format.setForeground(QColor("#C678DD"))
+        asp_jsp_format.setFontWeight(QFont.Weight.Bold)
+        asp_keywords = [
+            "Response", "Request", "Server", "Session", "Application",
+            "Dim", "Set", "Sub", "Function", "End", "Then", "jsp:", "page", "include"
+        ]
+        for word in asp_keywords:
+            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b", QRegularExpression.PatternOption.CaseInsensitiveOption), asp_jsp_format))
+
+        # ----------------------------------------------------
+        # 9. Assembly (.asm, .s, .S)
+        # ----------------------------------------------------
+        asm_inst_format = QTextCharFormat()
+        asm_inst_format.setForeground(QColor("#61AFEF"))
+        asm_inst_format.setFontWeight(QFont.Weight.Bold)
+        asm_instructions = [
+            "MOV", "PUSH", "POP", "ADD", "SUB", "JMP", "CALL", "RET", "LEA",
+            "INT", "NOP", "CMP", "JE", "JNE", "MOVZX", "XOR", "AND", "OR",
+            "mov", "push", "pop", "add", "sub", "jmp", "call", "ret", "lea"
+        ]
+        for word in asm_instructions:
+            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), asm_inst_format))
+
+        asm_dir_format = QTextCharFormat()
+        asm_dir_format.setForeground(QColor("#E5C07B"))
+        asm_directives = [".section", ".global", ".data", ".text", ".globl", "global", "section", "org"]
+        for word in asm_directives:
+            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), asm_dir_format))
+
+        # ----------------------------------------------------
+        # 10. Java & Kotlin / Groovy (.java, .groovy, .kt)
         # ----------------------------------------------------
         java_format = QTextCharFormat()
         java_format.setForeground(QColor("#E5C07B"))
@@ -96,14 +156,13 @@ class ProjectHighlighter(QSyntaxHighlighter):
         java_keywords = [
             "package", "interface", "enum", "extends", "implements", "override",
             "static", "final", "throws", "finally", "new", "String", "Boolean",
-            "Integer", "Double", "Float", "Long", "synchronized", "volatile",
-            "transient", "native", "strictfp", "abstract", "default"
+            "Integer", "Double", "Float", "Long", "synchronized", "volatile"
         ]
         for word in java_keywords:
             self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), java_format))
 
         # ----------------------------------------------------
-        # 7. Microsoft .NET Framework Languages (.cs, .vb, .fs)
+        # 11. Microsoft .NET (.cs, .vb, .fs)
         # ----------------------------------------------------
         dotnet_format = QTextCharFormat()
         dotnet_format.setForeground(QColor("#61AFEF"))
@@ -111,7 +170,6 @@ class ProjectHighlighter(QSyntaxHighlighter):
         dotnet_keywords = [
             "using", "namespace", "struct", "internal", "readonly", "async", "await",
             "foreach", "decimal", "object", "dynamic", "event", "delegate", "get", "set",
-            "add", "remove", "where", "yield", "partial", "extern",
             "Module", "Sub", "Function", "Dim", "As", "Inherits", "End",
             "let", "rec", "open", "type", "member", "match", "with", "mutable"
         ]
@@ -119,36 +177,7 @@ class ProjectHighlighter(QSyntaxHighlighter):
             self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), dotnet_format))
 
         # ----------------------------------------------------
-        # 8. Ruby, Swift, Dart (.rb, .swift, .dart)
-        # ----------------------------------------------------
-        other_lang_format = QTextCharFormat()
-        other_lang_format.setForeground(QColor("#98C379"))
-        other_lang_format.setFontWeight(QFont.Weight.Bold)
-        other_keywords = [
-            "module", "require", "include", "attr_accessor", "elsif", "end", "yield",
-            "guard", "protocol", "extension", "external", "dynamic",
-            "final", "late", "required", "covariant", "factory", "get", "set"
-        ]
-        for word in other_keywords:
-            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), other_lang_format))
-
-        # ----------------------------------------------------
-        # 9. Shell Script (.sh, .bash, .zsh)
-        # ----------------------------------------------------
-        shell_format = QTextCharFormat()
-        shell_format.setForeground(QColor("#98C379"))
-        shell_format.setFontWeight(QFont.Weight.Bold)
-        shell_keywords = ["fi", "then", "elif", "do", "done", "case", "esac", "until", "echo", "export", "local", "readonly"]
-        for word in shell_keywords:
-            self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b"), shell_format))
-
-        # Shell Variables ($VAR, ${VAR})
-        var_format = QTextCharFormat()
-        var_format.setForeground(QColor("#E06C75"))
-        self.highlighting_rules.append((QRegularExpression(r"\$[a-zA-Z_][a-zA-Z0-9_]*|\$\{[^\}]+\}"), var_format))
-
-        # ----------------------------------------------------
-        # 10. SQL (.sql)
+        # 12. SQL (.sql)
         # ----------------------------------------------------
         sql_format = QTextCharFormat()
         sql_format.setForeground(QColor("#61AFEF"))
@@ -162,23 +191,20 @@ class ProjectHighlighter(QSyntaxHighlighter):
             self.highlighting_rules.append((QRegularExpression(rf"\b{word}\b", QRegularExpression.PatternOption.CaseInsensitiveOption), sql_format))
 
         # ----------------------------------------------------
-        # 11. JSON Keys ("key":) (.json)
+        # 13. JSON & YAML Keys (.json, .yml, .yaml)
         # ----------------------------------------------------
         json_key_format = QTextCharFormat()
         json_key_format.setForeground(QColor("#E06C75"))
         json_key_format.setFontWeight(QFont.Weight.Bold)
         self.highlighting_rules.append((QRegularExpression(r'"([^"\\]|\\.)*"\s*:'), json_key_format))
 
-        # ----------------------------------------------------
-        # 12. YAML Keys (key:) (.yml, .yaml)
-        # ----------------------------------------------------
         yaml_key_format = QTextCharFormat()
         yaml_key_format.setForeground(QColor("#E06C75"))
         yaml_key_format.setFontWeight(QFont.Weight.Bold)
         self.highlighting_rules.append((QRegularExpression(r"^[ \t]*[a-zA-Z0-9_-]+\s*:", QRegularExpression.PatternOption.MultilineOption), yaml_key_format))
 
         # ----------------------------------------------------
-        # 13. HTML / XML / XAML / QML Tags & Attributes (.html, .xml, .xaml, .qml, .ui)
+        # 14. HTML / XML / XAML / QML Tags & Attributes
         # ----------------------------------------------------
         tag_format = QTextCharFormat()
         tag_format.setForeground(QColor("#E06C75"))
@@ -190,19 +216,15 @@ class ProjectHighlighter(QSyntaxHighlighter):
         self.highlighting_rules.append((QRegularExpression(r"\b[a-zA-Z_:][-a-zA-Z0-9_:.]*(?=\s*=\s*[\"'])"), attr_format))
 
         # ----------------------------------------------------
-        # 14. Markdown Headers & Formatting (.md)
+        # 15. Markdown Headers & Formatting (.md)
         # ----------------------------------------------------
         md_header_format = QTextCharFormat()
         md_header_format.setForeground(QColor("#61AFEF"))
         md_header_format.setFontWeight(QFont.Weight.Bold)
         self.highlighting_rules.append((QRegularExpression(r"^#{1,6}\s+.*$"), md_header_format))
 
-        md_bold_format = QTextCharFormat()
-        md_bold_format.setFontWeight(QFont.Weight.Bold)
-        self.highlighting_rules.append((QRegularExpression(r"\*\*.*?\*\*"), md_bold_format))
-
         # ----------------------------------------------------
-        # 15. Strings & Literals ("...", '...')
+        # 16. Strings & Literals ("...", '...')
         # ----------------------------------------------------
         string_format = QTextCharFormat()
         string_format.setForeground(QColor("#98C379"))
@@ -210,7 +232,7 @@ class ProjectHighlighter(QSyntaxHighlighter):
         self.highlighting_rules.append((QRegularExpression(r"'.*?'"), string_format))
 
         # ----------------------------------------------------
-        # 16. Numbers & Booleans/Null
+        # 17. Numbers & Booleans/Null
         # ----------------------------------------------------
         number_format = QTextCharFormat()
         number_format.setForeground(QColor("#D19A66"))
@@ -222,13 +244,14 @@ class ProjectHighlighter(QSyntaxHighlighter):
         self.highlighting_rules.append((QRegularExpression(r'\b(true|false|null|nil|TRUE|FALSE|NULL|NIL)\b'), bool_null_format))
 
         # ----------------------------------------------------
-        # 17. Comments (#..., //..., /*...*/, <!--...-->)
+        # 18. Comments (#..., //..., ;..., /*...*/, <!--...-->)
         # ----------------------------------------------------
         comment_format = QTextCharFormat()
         comment_format.setForeground(QColor("#5C6370"))
         comment_format.setFontItalic(True)
         self.highlighting_rules.append((QRegularExpression(r"#.*"), comment_format))
         self.highlighting_rules.append((QRegularExpression(r"//.*"), comment_format))
+        self.highlighting_rules.append((QRegularExpression(r";.*"), comment_format))
         self.highlighting_rules.append((QRegularExpression(r"/\*.*?\*/", QRegularExpression.PatternOption.DotMatchesEverythingOption), comment_format))
         self.highlighting_rules.append((QRegularExpression(r"<!--.*?-->", QRegularExpression.PatternOption.DotMatchesEverythingOption), comment_format))
 
