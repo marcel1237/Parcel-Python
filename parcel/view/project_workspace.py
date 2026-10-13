@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSplitter, QTabWidget, QMessageBox, QMenu
-from PyQt6.QtCore import Qt, QProcess
+from PyQt6.QtCore import Qt, QProcess, QCoreApplication
 from PyQt6.QtGui import QIcon, QCursor
 from parcel.view.project_header import ProjectHeader
 from parcel.view.explorer.package_explorer import PackageExplorer
@@ -152,15 +152,18 @@ class ProjectWorkspace(QWidget):
         self.bottom_tabs.setVisible(True)
         self.bottom_tabs.setCurrentWidget(self.terminal_pane)
         self.terminal_pane.output.appendPlainText("🔨 [Build + Backup] Iniciando backup incremental e build do projeto...")
+        QCoreApplication.processEvents()
 
         try:
             # 1. Perform SQLite Backup
             BackupService.get_instance().init(self.project_path)
             BackupService.get_instance().perform_build_backup("Automated build backup")
             self.terminal_pane.output.appendPlainText("✅ [Backup] Snapshot SQLite (.parcel_backups.db) realizado com sucesso.")
+            QCoreApplication.processEvents()
 
-            # 2. Run Python Syntax Compilation Build Check
-            self.terminal_pane.output.appendPlainText("⚙️ [Build] Verificando sintaxe e compilando arquivos do projeto...")
+            # 2. Run Python Syntax Compilation & Test Build Check
+            self.terminal_pane.output.appendPlainText("⚙️ [Build] Verificando sintaxe e compilando arquivos do projeto Python...")
+            QCoreApplication.processEvents()
             
             py_files = []
             for root, dirs, files in os.walk(self.project_path):
@@ -172,18 +175,38 @@ class ProjectWorkspace(QWidget):
 
             success = True
             for pf in py_files:
+                rel_path = os.path.relpath(pf, self.project_path)
                 res = subprocess.run([sys.executable, "-m", "py_compile", pf], capture_output=True, text=True)
                 if res.returncode != 0:
                     success = False
-                    self.terminal_pane.output.appendPlainText(f"❌ Erro de compilação em {pf}:\n{res.stderr}")
+                    self.terminal_pane.output.appendPlainText(f"❌ Erro de compilação em {rel_path}:\n{res.stderr}")
                 else:
-                    self.terminal_pane.output.appendPlainText(f"   ✓ Compilado: {os.path.basename(pf)}")
+                    self.terminal_pane.output.appendPlainText(f"   [OK] Compilado com sucesso: {rel_path}")
+                self.terminal_pane.output.ensureCursorVisible()
+                QCoreApplication.processEvents()
+
+            # Also check if build.sh exists and run it
+            build_sh = os.path.join(self.project_path, "build.sh")
+            if os.path.exists(build_sh):
+                self.terminal_pane.output.appendPlainText(f"🚀 [Build] Executando script build.sh encontrado no projeto...")
+                QCoreApplication.processEvents()
+                proc = subprocess.run(["bash", build_sh], cwd=self.project_path, capture_output=True, text=True)
+                if proc.stdout:
+                    self.terminal_pane.output.appendPlainText(proc.stdout)
+                if proc.stderr:
+                    self.terminal_pane.output.appendPlainText(proc.stderr)
+                if proc.returncode != 0:
+                    success = False
 
             if success:
                 self.terminal_pane.output.appendPlainText("🎉 [Build + Backup] Build concluído com sucesso! 0 erros.")
+                self.terminal_pane.output.ensureCursorVisible()
+                QCoreApplication.processEvents()
                 QMessageBox.information(self, "Build + Backup", "Build e Backup realizados com sucesso!")
             else:
                 self.terminal_pane.output.appendPlainText("⚠️ [Build + Backup] Build concluído com avisos/erros.")
+                self.terminal_pane.output.ensureCursorVisible()
+                QCoreApplication.processEvents()
         except Exception as e:
             self.terminal_pane.output.appendPlainText(f"❌ Erro crítico no Build + Backup: {str(e)}")
             QMessageBox.critical(self, "Erro no Build", str(e))
