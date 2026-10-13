@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTextEdit, QSplitter, QListWidget, QLineEdit, QComboBox, QFormLayout
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTextEdit, QSplitter, QListWidget, QLineEdit, QComboBox, QFormLayout, QSizePolicy
 )
 from PyQt6.QtCore import Qt, QRect, pyqtSignal, QPoint
 from PyQt6.QtGui import QPainter, QColor, QPen, QBrush, QFont
@@ -14,7 +14,7 @@ class DesignerCanvas(QWidget):
         self.selected_index = -1
         self.dragging = False
         self.drag_offset = QPoint()
-        self.setMinimumSize(400, 350)
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.setStyleSheet("background-color: #161925; border: 1px solid #2b2d30;")
 
     def set_elements(self, elements, selected_index):
@@ -98,14 +98,16 @@ class DesignerPane(QWidget):
         self.selected_index = 0
 
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setContentsMargins(2, 2, 2, 2)
+        layout.setSpacing(2)
 
         splitter = QSplitter(Qt.Orientation.Horizontal, self)
 
-        # 1. Expanded Component Palette (Left)
+        # 1. Component Palette (Left)
         palette_widget = QWidget(self)
         p_layout = QVBoxLayout(palette_widget)
-        p_layout.setContentsMargins(4, 4, 4, 4)
+        p_layout.setContentsMargins(2, 2, 2, 2)
+        p_layout.setSpacing(4)
         p_layout.addWidget(QLabel("<b>🎨 QML Palette</b>"))
 
         components = [
@@ -129,7 +131,8 @@ class DesignerPane(QWidget):
         # 2. Interactive Canvas (Center)
         center_widget = QWidget(self)
         c_layout = QVBoxLayout(center_widget)
-        c_layout.setContentsMargins(4, 4, 4, 4)
+        c_layout.setContentsMargins(2, 2, 2, 2)
+        c_layout.setSpacing(4)
         
         lbl_canvas = QLabel("📐 Canvas (Drag to move X, Y)")
         lbl_canvas.setStyleSheet("font-size: 11px; color: #888;")
@@ -148,11 +151,13 @@ class DesignerPane(QWidget):
         # 3. Inspector & QML Code Generator (Right)
         right_widget = QWidget(self)
         r_layout = QVBoxLayout(right_widget)
-        r_layout.setContentsMargins(4, 4, 4, 4)
+        r_layout.setContentsMargins(2, 2, 2, 2)
+        r_layout.setSpacing(4)
 
         r_layout.addWidget(QLabel("<b>⚙️ Inspector</b>"))
         self.form_layout = QFormLayout()
         self.form_layout.setContentsMargins(0, 0, 0, 0)
+        self.form_layout.setVerticalSpacing(4)
         
         self.txt_id = QLineEdit(self)
         self.txt_text = QLineEdit(self)
@@ -187,7 +192,7 @@ class DesignerPane(QWidget):
         splitter.addWidget(palette_widget)
         splitter.addWidget(center_widget)
         splitter.addWidget(right_widget)
-        splitter.setSizes([200, 550, 350])
+        splitter.setSizes([180, 560, 320])
 
         layout.addWidget(splitter)
         self.refresh_ui()
