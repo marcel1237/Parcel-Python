@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel-Python — Manual de Uso & Documentação</title>
+    <style>
+        :root {
+            --bg-dark: #0f111a;
+            --bg-surface: #161925;
+            --bg-card: #1e2238;
+            --accent-blue: #4285f4;
+            --accent-green: #34a853;
+            --accent-yellow: #ffd43b;
+            --accent-purple: #8e44ad;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
+            --border-color: #2b2d30;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #161925 0%, #0f111a 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        section {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        h2 {
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        h3 {
+            color: var(--accent-green);
+        }
+        code, pre {
+            background-color: #0b0d14;
+            color: #98c379;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .button-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: white;
+            margin-right: 5px;
+        }
+        .btn-east { background-color: #4285F4; }
+        .btn-south { background-color: #34A853; }
+        .btn-designer { background-color: #E67E22; }
+        .btn-build { background-color: #27ae60; }
+        .btn-export { background-color: #8E44AD; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🐍 Parcel-Python</h1>
+        <p>Toolkit de Desenvolvimento Industrial Baseado em IA & PyQt6</p>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <h2>1. Introdução ao Software</h2>
+            <p>O <b>Parcel-Python</b> é um Ambiente de Desenvolvimento Integrado (IDE) avançado e Toolkit Industrial desenvolvido em Python 3.10+ com PyQt6. Ele integra inteligência artificial on-device (SS AI Agent), versionamento incremental em SQLite (.parcel_backups.db), designer visual QML interativo e realce de sintaxe profissional para mais de 15 linguagens.</p>
+        </section>
+
+        <section>
+            <h2>2. Instalação & Execução Rápida</h2>
+            <p>Utilize os scripts de automação fornecidos na raiz do projeto para configurar o ambiente virtual e rodar a IDE:</p>
+            <pre><code># 1. Configurar dependências e ambiente virtual
+./build.sh
+
+# 2. Iniciar a IDE
+./run.sh</code></pre>
+            <p>Ou manualmente via terminal:</p>
+            <pre><code>python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 -m parcel.main</code></pre>
+        </section>
+
+        <section>
+            <h2>3. Navegação & Telas Iniciais</h2>
+            <ul>
+                <li><b>Dashboard:</b> Tela de boas-vindas com acesso rápido para criar novos projetos ou abrir projetos existentes.</li>
+                <li><b>New Project Wizard:</b> Assistente estruturado em etapas (Projeto, Linguagem, Framework, Dependências, Git e Sumário).</li>
+                <li><b>Open Project Analyzer:</b> Seleciona pastas de projeto e realiza análises estáticas (detecção de Git, contagem de arquivos, tamanho e build systems).</li>
+                <li><b>Settings:</b> Configuração segura de chave de API do Gemini (com criptografia local) e monitoramento de APIs integradas.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4. Workspace & Botões de Ação do Cabeçalho</h2>
+            <p>Ao abrir um projeto, o Workspace exibe o cabeçalho superior contendo os botões de controle industrial:</p>
+            <ul>
+                <li><span class="button-badge btn-east">✨ East Pane</span> Alterna o painel de assistentes de IA à direita (Gemini, OpenAI, Shell Scripting e Git).</li>
+                <li><span class="button-badge btn-south">🌐 South Pane</span> Alterna o painel inferior contendo navegadores web (Google, Duck.ai, ChatGPT), Terminal, Logs, Problemas e Banco de Dados.</li>
+                <li><span class="button-badge btn-designer">🎨 Designer</span> Abre o QML Visual Designer com canvas interativo.</li>
+                <li><span class="button-badge btn-build">🔨 Build + Backup</span> Executa backup incremental em SQLite (`.parcel_backups.db`) e compila/verifica a sintaxe do projeto em tempo real no Terminal.</li>
+                <li><span class="button-badge btn-export">📦 Export</span> Abre o menu de exportação nativa para pacotes Debian (`.deb`), Archives (`.tar.gz`) e estruturas AppImage (`.AppDir`).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. QML Visual Designer & Canvas Interativo</h2>
+            <p>O designer visual permite arrastar e posicionar componentes QML/Kirigami diretamente com o mouse no canvas:</p>
+            <ul>
+                <li><b>Paleta QML:</b> Mais de 30 componentes disponíveis (Botões, Inputs, Sliders, Containers, Listas, Diálogos).</li>
+                <li><b>Canvas Drag-and-Drop:</b> Clique e arraste qualquer componente para definir suas coordenadas <b>X</b> e <b>Y</b> visualmente.</li>
+                <li><b>Inspetor de Propriedades:</b> Atualização instantânea de IDs, textos, cores e dimensões.</li>
+                <li><b>Gerador QML:</b> Código QML gerado e atualizado ao vivo conforme você interage com o design.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>6. Syntax Highlighter Profissional</h2>
+            <p>O editor de código suporta realce de sintaxe avançado para: <b>Python, C/C++, Java, C#, VB.NET, F#, Go, Rust, JavaScript, TypeScript, PHP, Ruby, Perl, Raku, ASP, JSP, Assembly, Shell Script, SQL, JSON, YAML, HTML/XML/QML e Markdown</b>.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Marcel Aparecido de Andrade. Todos os direitos reservados. Proprietary Software License Agreement.</p>
+    </footer>
+
+</body>
+</html>
